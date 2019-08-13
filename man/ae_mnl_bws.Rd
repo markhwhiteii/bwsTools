@@ -18,7 +18,7 @@ and total time selected as worsts.}
 \item{worsts}{A string that is the name of the column for worsts in the data.}
 
 \item{z}{A z-value to calculate the confidence intervals. Defaults to 1.96,
-a 95% CI.}
+a 95\% CI.}
 }
 \value{
 A data.frame containing the utility coefficients (with standard error
@@ -33,6 +33,7 @@ closed-form solution to calculate utility coefficients—as well as their
 standard errors and confidence intervals—and choice probabilities.
 }
 \examples{
+# Replicate Table 6 from Lipovetsky & Conklin (2014)
 d <- data.frame(
   totals = c(7145, 7144, 7144, 7144, 7145, 7145, 7144, 7146, 8166, 
              7145, 7144, 7144, 7145, 7144, 7145, 7144, 7146),
@@ -41,7 +42,6 @@ d <- data.frame(
   worsts = c(1324, 2139, 113, 1010, 772, 3986, 1438, 2397, 1041, 1538, 
   4597, 966, 305, 2875, 2256, 2259, 1604)
 )
-# Replicate Table 6 from Lipovetsky & Conklin (2014)
 results <- ae_mnl_bws(d, "totals", "bests", "worsts")
 (d <- cbind(d, results))
 

@@ -18,7 +18,7 @@ and total time selected as worsts}
 \item{worsts}{A string that is the name of the column for worsts in the data}
 
 \item{z}{A z-value to calculate the confidence intervals. Defaults to 1.96,
-a 95% CI}
+a 95\% CI}
 }
 \value{
 A data frame containing the utility coefficients, standard errors,

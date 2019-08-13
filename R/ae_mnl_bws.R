@@ -14,7 +14,7 @@
 #' @param bests A string that is the name of the column for bests in the data.
 #' @param worsts A string that is the name of the column for worsts in the data.
 #' @param z A z-value to calculate the confidence intervals. Defaults to 1.96,
-#' a 95% CI.
+#' a 95\% CI.
 #' 
 #' @references 
 #' Lipovetsky, S., & Conklin, M. (2014). Best-worst scaling in analytical 
@@ -26,6 +26,7 @@
 #'   in the data.
 #' 
 #' @examples
+#' # Replicate Table 6 from Lipovetsky & Conklin (2014)
 #' d <- data.frame(
 #'   totals = c(7145, 7144, 7144, 7144, 7145, 7145, 7144, 7146, 8166, 
 #'              7145, 7144, 7144, 7145, 7144, 7145, 7144, 7146),
@@ -34,7 +35,6 @@
 #'   worsts = c(1324, 2139, 113, 1010, 772, 3986, 1438, 2397, 1041, 1538, 
 #'   4597, 966, 305, 2875, 2256, 2259, 1604)
 #' )
-#' # Replicate Table 6 from Lipovetsky & Conklin (2014)
 #' results <- ae_mnl_bws(d, "totals", "bests", "worsts")
 #' (d <- cbind(d, results))
 #' 

@@ -11,7 +11,7 @@
 #' @param bests A string that is the name of the column for bests in the data
 #' @param worsts A string that is the name of the column for worsts in the data
 #' @param z A z-value to calculate the confidence intervals. Defaults to 1.96,
-#' a 95% CI
+#' a 95\% CI
 #' 
 #' @return A data frame containing the utility coefficients, standard errors,
 #' and upper and lower confidence intervals for each item (row) in the data
