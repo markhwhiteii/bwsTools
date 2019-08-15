@@ -10,7 +10,8 @@ bibds
 }
 \description{
 A data.frame of 32 different balanced incomplete block designs (BIBD) that
-  can be used to set up best-worst scaling studies. The columns are: t, which
+  can be used to set up best-worst scaling studies. The columns are: design,
+  which is an identification number that can is fed to get_bibd; t, which
   is the number of items (or "treatments") one will be using in the study;
   k, which is how many of the items the respondent sees per trial; r, which
   is how many times the participant sees each item across all of the trials;

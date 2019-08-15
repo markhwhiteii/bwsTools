@@ -17,6 +17,8 @@
 #' @param id A string of the name of the id column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
+#' @param std Logical of whether or not one wants to standardize the data to
+#'   a -1 to +1 range.
 #' @param wide Logical of whether or not one wants the data returned in long
 #'   (each row is an item-respondent combination and all best-worst scores are
 #'   in the same column) format (FALSE) or in wide format (where each row is a 
@@ -32,28 +34,37 @@
 #' data(indiv)
 #' head(indiv)
 #' indiv_bws(indiv, "id", "label", "value")
-#' indiv_bws(indiv, "id", "label", "value", TRUE)
+#' indiv_bws(indiv, "id", "label", "value", TRUE, TRUE)
 #' 
 #' @references 
+#' Louviere, J., Lings, I., Islam, T., Gudergan, S., & Flynn (2013). An
+#'   introduction to the application of (case 1) best-worst scaling in marketing
+#'   research. International Journal of Research in Marketing, 30(3), 292-303.
 #' 
-#' 
-#' @importFrom magrittr %>%
-#' @importFrom rlang !!
+#' @import magrittr
+#' @import rlang
 #' @export
-indiv_bws <- function(data, id, item, choice, wide = FALSE) {
+indiv_bws <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
+  
+  key <- table(data[[item]]) / length(unique(data[[id]]))
   
   if (!all(data[[choice]] %in% -1:1))
     stop("The value column must consist of only -1s, 0s, and 1s")
   
   out <- data %>%
-    dplyr::group_by(!!rlang::sym(id), !!rlang::sym(item)) %>%
+    dplyr::group_by(!!sym(id), !!sym(item)) %>%
     dplyr::summarise(
-      bws = sum(!!rlang::sym(choice) == 1) - sum(!!rlang::sym(choice) == -1)
+      bws = sum(!!sym(choice) == 1) - sum(!!sym(choice) == -1)
     ) %>%
     dplyr::ungroup()
   
+  if (std) {
+    key <- c(table(data[[item]]) / length(unique(data[[id]])))
+    out$bws <- out$bws / key[out[[item]]]
+  }
+  
   if (wide) {
-    out <- tidyr::spread(out, !!rlang::sym(item), bws)
+    out <- tidyr::spread(out, !!sym(item), bws)
   }
   
   return(out)

@@ -2,5 +2,5 @@
 
 export(ae_mnl_bws)
 export(indiv_bws)
-importFrom(magrittr,"%>%")
-importFrom(rlang,"!!")
+import(magrittr)
+import(rlang)

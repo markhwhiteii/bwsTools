@@ -4,23 +4,53 @@
 \alias{indiv_bws}
 \title{Calculate Individual Best-Worst Scores}
 \usage{
-indiv_bws(data, id, item, choice, wide = FALSE)
+indiv_bws(data, id, item, choice, std = FALSE, wide = FALSE)
 }
 \arguments{
-\item{wide}{}
+\item{data}{A data.frame of the type described in details.}
+
+\item{id}{A string of the name of the id column.}
+
+\item{item}{A string of the name of the item column.}
+
+\item{choice}{A string of the name of the choice column.}
+
+\item{std}{Logical of whether or not one wants to standardize the data to
+a -1 to +1 range.}
+
+\item{wide}{Logical of whether or not one wants the data returned in long
+(each row is an item-respondent combination and all best-worst scores are
+in the same column) format (FALSE) or in wide format (where each row is a 
+respondent, and the best-wost scores for the items are in their own 
+columns). See the `indiv` data as an example.}
 }
 \value{
-
+A data.frame containing the id and item columns as well as a "bws" column
+  that indicates the best worst score. If `wide = FALSE`, then each item
+  has its own column and the bws is filled-in those columns.
 }
 \description{
-
+Caclulate best-worst scores for each respondent-item combination. This is
+  simply taking the total number of times a respondent selected the item
+  as "best" and subtracting from that the number of times a respondent
+  selected the item as "worst" (Louviere et al., 2013).
 }
 \details{
-
+This function requires data to be in a specified format. Each row must
+  represent a respondent-block-label combination. That is, it indicates
+  the person, the block (or trial), the item that was judged, and a column
+  indicating whether it was chosen as best (+1), worst (-1), or wasn't 
+  selected as either (0).
 }
 \examples{
+data(indiv)
+head(indiv)
+indiv_bws(indiv, "id", "label", "value")
+indiv_bws(indiv, "id", "label", "value", TRUE, TRUE)
 
 }
 \references{
-
+Louviere, J., Lings, I., Islam, T., Gudergan, S., & Flynn (2013). An
+  introduction to the application of (case 1) best-worst scaling in marketing
+  research. International Journal of Research in Marketing, 30(3), 292-303.
 }
