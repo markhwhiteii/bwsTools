@@ -46,8 +46,6 @@
 #' @export
 indiv_bws <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
   
-  key <- table(data[[item]]) / length(unique(data[[id]]))
-  
   if (!all(data[[choice]] %in% -1:1))
     stop("The value column must consist of only -1s, 0s, and 1s")
   
