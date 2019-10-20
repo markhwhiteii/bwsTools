@@ -22,10 +22,10 @@ a 95\% CI}
 }
 \value{
 A data frame containing the utility coefficients, standard errors,
-and upper and lower confidence intervals for each item (row) in the data
+  and upper and lower confidence intervals for each item (row) in the data
 }
 \description{
 This is a simple wrapper for get_b0, and it will compute utility
-coefficients, standard errors, and confidence intervals for multiple
-items in a best-worst scaling design.
+  coefficients, standard errors, and confidence intervals for multiple
+  items in a best-worst scaling design.
 }
