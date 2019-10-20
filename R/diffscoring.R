@@ -1,4 +1,4 @@
-#' Calculate Individual Best-Worst Scores
+#' Difference Method to Calculate Individual Best-Worst Scores
 #'
 #' @description 
 #' Caclulate best-worst scores for each respondent-item combination. This is
@@ -33,8 +33,8 @@
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' indiv_bws(indiv, "id", "label", "value")
-#' indiv_bws(indiv, "id", "label", "value", TRUE, TRUE)
+#' diffscoring(indiv, "id", "label", "value")
+#' diffscoring(indiv, "id", "label", "value", TRUE, TRUE)
 #' 
 #' @references 
 #' Louviere, J., Lings, I., Islam, T., Gudergan, S., & Flynn (2013). An
@@ -44,10 +44,10 @@
 #' @import magrittr
 #' @import rlang
 #' @export
-indiv_bws <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
+diffscoring <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
   
   if (!all(data[[choice]] %in% -1:1))
-    stop("The value column must consist of only -1s, 0s, and 1s")
+    stop("The choice column must consist of only -1s, 0s, and 1s")
   
   out <- data %>%
     dplyr::group_by(!!sym(id), !!sym(item)) %>%
