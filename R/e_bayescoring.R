@@ -14,8 +14,8 @@
 #' @param id A string of the name of the id column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
-#' @param E ...
-#' @param alpha ...
+#' @param E TODO add description
+#' @param alpha TODO add description
 #' @param wide Logical of whether or not one wants the data returned in long
 #'   (each row is an item-respondent combination and all best-worst scores are
 #'   in the same column) format (FALSE) or in wide format (where each row is a 
@@ -64,7 +64,7 @@ e_bayescoring <- function(data, id, item, choice, E = .01,
       TRUE ~ p_ij
     ))
   
-  # combine to empirical bayes ----
+  # combine to get empirical bayes ----
   out <- ind_dat %>% 
     dplyr::left_join(agg_dat, by = item) %>% 
     dplyr::mutate(
