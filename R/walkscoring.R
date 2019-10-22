@@ -37,7 +37,7 @@
 #' @references 
 #' INSERT MY PAPER HERE LATER.
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @import rlang
 #' @export
 walkscoring <- function(data, id, block, item, choice, walks = 10000) {

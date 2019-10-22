@@ -42,7 +42,7 @@
 #'   research. International Journal of Research in Marketing, 30(3), 292-303.
 #'   doi: 10.1016/j.ijresmar.2012.10.002
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @import rlang
 #' @export
 diffscoring <- function(data, id, item, choice, std = FALSE, wide = FALSE) {

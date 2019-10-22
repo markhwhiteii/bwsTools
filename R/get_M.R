@@ -22,7 +22,7 @@
 #' @return
 #' A symmetric adjacency matrix representing the relationship between items.
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @import rlang
 get_M <- function(data, bw, block, item, choice, normal = TRUE) {
   

@@ -9,7 +9,7 @@
 #'   
 #' @return A tibble with columns for the item and Elo score
 #'
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 get_eloscores <- function(eloresults, K = 30, iter = 100) {
   out <- dplyr::tibble() # initialize output
   

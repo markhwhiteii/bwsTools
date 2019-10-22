@@ -10,7 +10,7 @@
 #' 
 #' @return A tibble with columns of winners and losers to score.
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 get_eloresults <- function(data, block, item, choice) {
   results <- dplyr::tibble() # initialize results
   

@@ -50,7 +50,7 @@
 #'   without HB-MNL. Advances in Adaptive Data Analysis, 7(1). doi:
 #'   10.1142/S1793536915500028
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @import rlang
 #' @export
 e_bayescoring <- function(data, id, item, choice, E = .01, 

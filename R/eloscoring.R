@@ -52,7 +52,7 @@
 #'   scaling experiments. Behavior Research Methods. doi: 
 #'   10.3758/s13428-019-01270-w
 #' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @import rlang
 #' @export
 eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
