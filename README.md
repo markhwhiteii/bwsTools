@@ -14,4 +14,4 @@ Planned for 1.0 release:
 
 - A function to generate a balanced incomplete block design from the data.frame of designs
 
-- Individual estimates: based on Elo and value ratings
+- Individual estimates: based on Elo ratings
