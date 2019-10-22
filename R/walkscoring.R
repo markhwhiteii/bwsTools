@@ -25,7 +25,8 @@
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' walkscoring(indiv, "id", "block", "label", "value")
+#' # use more than 10 walks; only using 10 here for speed
+#' walkscoring(indiv, "id", "block", "label", "value", 10)
 #' 
 #' @references 
 #' INSERT MY PAPER HERE LATER.

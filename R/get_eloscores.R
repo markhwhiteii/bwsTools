@@ -1,3 +1,14 @@
+#' Turn Win-Loss Record Data into Elo Scores
+#' 
+#' Takes what get_eloresults() returns and turns these into Elo scores.
+#' 
+#' @param eloresults What get_eloresults() returns
+#' @param K The Elo K-factor. The default is 30, per Hollis (2018).
+#' @param iter Number of different randomizations of the "matchup" order to 
+#'   iterate through.
+#'   
+#' @return A tibble with columns for the item and Elo score
+#'
 #' @import magrittr
 get_eloscores <- function(eloresults, K = 30, iter = 100) {
   out <- dplyr::tibble() # initialize output
