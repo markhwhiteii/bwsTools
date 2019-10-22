@@ -18,10 +18,17 @@ walkscoring(data, id, block, item, choice, walks = 10000)
 \item{choice}{A string of the name of the choice column.}
 
 \item{walks}{Integer indicating how many random walks to simulate.}
+
+\item{wide}{Logical of whether or not one wants the data returned in long
+(each row is an item-respondent combination and all best-worst scores are
+in the same column) format (FALSE) or in wide format (where each row is a 
+respondent, and the best-wost scores for the items are in their own 
+columns). See the `indiv` data as an example.}
 }
 \value{
-A data.frame containing the id and columns for each item, containing that
-  individual's walkscore for that item.
+A data.frame containing the id and item columns as well as a "walk" column
+  that indicates the best worst score. If `wide = TRUE`, then each item
+  has its own column and the walkscore is filled-in those columns.
 }
 \description{
 Caclulate best-worst scores for each respondent-item combination. This uses
@@ -37,8 +44,8 @@ This function requires data to be in a specified format. Each row must
 \examples{
 data(indiv)
 head(indiv)
-# use more than 10 walks; only using 10 here for speed
-walkscoring(indiv, "id", "block", "label", "value", 10)
+# use more than 100 walks; only using 10 here for speed
+walkscoring(indiv, "id", "block", "label", "value", 100)
 
 }
 \references{
