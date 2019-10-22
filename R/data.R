@@ -22,6 +22,6 @@
 #' Example Data for Individual-Level Best-Worst Scoring
 #'
 #' @description
-#' A data.frame that shows the format a data.frame should take when it is
-#'   submitted to the `indiv_bws` function.
+#' A tibble that shows the format a tibble should take when it is
+#'   submitted to a individual `*scoring` function.
 "indiv"
