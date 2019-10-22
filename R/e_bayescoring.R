@@ -51,7 +51,7 @@
 #'   10.1142/S1793536915500028
 #' 
 #' @importFrom magrittr "%>%"
-#' @import rlang
+#' @importFrom rlang sym
 #' @export
 e_bayescoring <- function(data, id, item, choice, E = .01, 
                           alpha = .1, wide = FALSE) {

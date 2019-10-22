@@ -53,7 +53,7 @@
 #'   10.3758/s13428-019-01270-w
 #' 
 #' @importFrom magrittr "%>%"
-#' @import rlang
+#' @importFrom rlang sym
 #' @export
 eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
                        wide = FALSE) {

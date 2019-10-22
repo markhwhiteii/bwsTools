@@ -43,7 +43,7 @@
 #'   doi: 10.1016/j.ijresmar.2012.10.002
 #' 
 #' @importFrom magrittr "%>%"
-#' @import rlang
+#' @importFrom rlang sym
 #' @export
 diffscoring <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
   
