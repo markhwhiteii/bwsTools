@@ -17,20 +17,28 @@
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
 #' @param walks Integer indicating how many random walks to simulate.
+#' @param wide Logical of whether or not one wants the data returned in long
+#'   (each row is an item-respondent combination and all best-worst scores are
+#'   in the same column) format (FALSE) or in wide format (where each row is a 
+#'   respondent, and the best-wost scores for the items are in their own 
+#'   columns). See the `indiv` data as an example.
 #' 
 #' @return
-#' A data.frame containing the id and columns for each item, containing that
-#'   individual's walkscore for that item.
+#' A data.frame containing the id and item columns as well as a "walk" column
+#'   that indicates the best worst score. If `wide = TRUE`, then each item
+#'   has its own column and the walkscore is filled-in those columns.
 #' 
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' # use more than 10 walks; only using 10 here for speed
-#' walkscoring(indiv, "id", "block", "label", "value", 10)
+#' # use more than 100 walks; only using 10 here for speed
+#' walkscoring(indiv, "id", "block", "label", "value", 100)
 #' 
 #' @references 
 #' INSERT MY PAPER HERE LATER.
 #' 
+#' @import magrittr
+#' @import rlang
 #' @export
 walkscoring <- function(data, id, block, item, choice, walks = 10000) {
   
@@ -49,8 +57,15 @@ walkscoring <- function(data, id, block, item, choice, walks = 10000) {
   
   # tidy ----
   out <- do.call(rbind, out)
-  out <- as.data.frame(cbind(id = unique(data[[id]]), out))
+  out <- dplyr::as_tibble(cbind(id = unique(data[[id]]), out))
   colnames(out)[1] <- id
+  
+  # already wide, gather to tidy by default ----
+  if (!wide) {
+    out <- out %>% 
+      tidyr::gather(item, "walk", -!!sym(id)) %>% 
+      dplyr::arrange(id)
+  }
   
   return(out)
 }

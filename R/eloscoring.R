@@ -53,8 +53,10 @@
 #'   10.3758/s13428-019-01270-w
 #' 
 #' @import magrittr
+#' @import rlang
 #' @export
-eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100) {
+eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
+                       wide = FALSE) {
   
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(cid) {
@@ -69,6 +71,12 @@ eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100) {
     dplyr::select(id, item, elo)
   
   colnames(out) <- c(id, item, "elo")
+  
+  # pivot wide, if requested ----
+  if (wide) {
+    out <- out %>% 
+      tidyr::spread(!!sym(item), elo)
+  }
   
   return(out)
 }

@@ -94,5 +94,11 @@ e_bayescoring <- function(data, id, item, choice, E = .01,
     dplyr::mutate(b_ebayes = log(p_ij / (1 - p_ij))) %>% # equation 5
     dplyr::select(!!sym(id), !!sym(item), b_ebayes)
   
+  # pivot wide, if requested ----
+  if (wide) {
+    out <- out %>% 
+      tidyr::spread(!!sym(item), b_ebayes)
+  }
+  
   return(out)
 }
