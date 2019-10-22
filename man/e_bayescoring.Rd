@@ -16,9 +16,14 @@ e_bayescoring(data, id, item, choice, E = 0.01, alpha = 0.1,
 
 \item{choice}{A string of the name of the choice column.}
 
-\item{E}{TODO add description}
+\item{E}{Value of precision shown in Equation 8 of Lipovetsky & Conklin
+(2015). If the naive estimate for a choice probability is 0, it is replaced
+with E; If the naive estimate for the choice probability is 1, i is
+replaced with 1 - E.}
 
-\item{alpha}{TODO add description}
+\item{alpha}{The mixing parameter shown in Equation 10 of Lipovetsky &
+Conklin (2015). This shapes how much the naive individual estimate and how
+much of the aggregate estimate influences the resulting estimate.}
 
 \item{wide}{Logical of whether or not one wants the data returned in long
 (each row is an item-respondent combination and all best-worst scores are
@@ -27,10 +32,20 @@ respondent, and the best-wost scores for the items are in their own
 columns). See the `indiv` data as an example.}
 }
 \value{
-
+A data.frame containing the id and item columns as well as a "b_ebayes" 
+  column that indicates the utility coefficient. If `wide = TRUE`, then 
+  each item has its own column and the coefficient is filled-in 
+  those columns.
 }
 \description{
-
+Individual utilities from empirical bayes estimations. Instead of doing the
+  computationally-expensive hierarchical Bayesian multinomial logistic
+  regression model, Lipovetsky & Conklin (2015) show an empirical Bayes
+  way to calculate this analytically. This function calculates choice
+  probabilities shown using Equation 10 in Lipovetsky & Conklin (2015) and
+  transforms them to be on a linear regression coefficient scale. Default
+  values for the E and alpha parameters are those performing best in their
+  simulations.
 }
 \details{
 This function requires data to be in a specified format. Each row must
@@ -40,9 +55,13 @@ This function requires data to be in a specified format. Each row must
   selected as either (0).
 }
 \examples{
-
+data(indiv)
+head(indiv)
+e_bayescoring(indiv, "id", "label", "value")
 
 }
 \references{
-
+Lipovetsky, S., & Conklin, M. (2015). MaxDiff priority estimations with and
+  without HB-MNL. Advances in Adaptive Data Analysis, 7(1). doi:
+  10.1142/S1793536915500028
 }

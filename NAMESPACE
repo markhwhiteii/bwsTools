@@ -3,6 +3,7 @@
 export(ae_mnl)
 export(diffscoring)
 export(e_bayescoring)
+export(eloscoring)
 export(walkscoring)
 import(magrittr)
 import(rlang)

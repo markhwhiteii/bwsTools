@@ -26,7 +26,7 @@ columns). See the `indiv` data as an example.}
 }
 \value{
 A data.frame containing the id and item columns as well as a "bws" column
-  that indicates the best worst score. If `wide = FALSE`, then each item
+  that indicates the best worst score. If `wide = TRUE`, then each item
   has its own column and the bws is filled-in those columns.
 }
 \description{
@@ -53,4 +53,5 @@ diffscoring(indiv, "id", "label", "value", TRUE, TRUE)
 Louviere, J., Lings, I., Islam, T., Gudergan, S., & Flynn (2013). An
   introduction to the application of (case 1) best-worst scaling in marketing
   research. International Journal of Research in Marketing, 30(3), 292-303.
+  doi: 10.1016/j.ijresmar.2012.10.002
 }
