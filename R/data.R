@@ -19,7 +19,7 @@
 #'   New York: John Wiley & Sons, Inc.
 "bibds"
 
-#' Example Data for Individual-Level Best-Worst Scoring
+#' Example Data for Individual-Level Best-Worst Scaling
 #'
 #' @description
 #' A tibble that shows the format a tibble should take when it is
