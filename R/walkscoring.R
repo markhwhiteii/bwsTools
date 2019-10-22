@@ -40,7 +40,8 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym
 #' @export
-walkscoring <- function(data, id, block, item, choice, walks = 10000) {
+walkscoring <- function(data, id, block, item, choice, walks = 10000,
+                        wide = FALSE) {
   
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(x) {
