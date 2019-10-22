@@ -23,5 +23,5 @@
 #'
 #' @description
 #' A tibble that shows the format a tibble should take when it is
-#'   submitted to a individual `*scoring` function.
+#'   submitted to a individual `scoring` function.
 "indiv"

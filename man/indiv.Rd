@@ -3,13 +3,13 @@
 \docType{data}
 \name{indiv}
 \alias{indiv}
-\title{Example Data for Individual-Level Best-Worst Scoring}
-\format{An object of class \code{data.frame} with 72 rows and 4 columns.}
+\title{Example Data for Individual-Level Best-Worst Scaling}
+\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 520 rows and 4 columns.}
 \usage{
 indiv
 }
 \description{
-A data.frame that shows the format a data.frame should take when it is
-  submitted to the `indiv_bws` function.
+A tibble that shows the format a tibble should take when it is
+  submitted to a individual `scoring` function.
 }
 \keyword{datasets}
