@@ -9,8 +9,6 @@
 #' @param choice A string of the name of the choice column.
 #' 
 #' @return A tibble with columns of winners and losers to score.
-#' 
-#' @importFrom magrittr "%>%"
 get_eloresults <- function(data, block, item, choice) {
   results <- dplyr::tibble() # initialize results
   
@@ -28,12 +26,16 @@ get_eloresults <- function(data, block, item, choice) {
     worst <- cb[[item]][cb[[choice]] == -1]
     
     # best vs. else
-    results <- results %>% 
-      dplyr::bind_rows(dplyr::tibble(winner = best, loser = ci[ci != best]))
+    results <- dplyr::bind_rows(
+      results, 
+      dplyr::tibble(winner = best, loser = ci[ci != best])
+    )
     
     # neithers vs. worst
-    results <- results %>% 
-      dplyr::bind_rows(dplyr::tibble(winner = neithers, loser = worst))
+    results <- dplyr::bind_rows(
+      results, 
+      dplyr::tibble(winner = neithers, loser = worst)
+    )
   }
   
   return(results)

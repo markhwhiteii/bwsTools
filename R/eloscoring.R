@@ -48,6 +48,7 @@
 #' Hollis, G. (2018). Scoring best-worst data in unbalanced many-item designs,
 #'   with applications to crowdsourcing semantic judgments. Behavior Research
 #'   Methods, 50(2), 711-729. doi: 10.3758/s13428-017-0898-2
+#'
 #' Hollis, G. (2019). The role of number of items per trial in best-worst
 #'   scaling experiments. Behavior Research Methods. doi: 
 #'   10.3758/s13428-019-01270-w
@@ -60,7 +61,7 @@ eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
   
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(cid) {
-    get_eloresults(data[data[[id]] == cid, ], "block", "issue", "value") %>% 
+    get_eloresults(data[data[[id]] == cid, ], block, item, choice) %>% 
       get_eloscores(K, iter) %>% 
       dplyr::mutate(id = cid)
   }) %>% 

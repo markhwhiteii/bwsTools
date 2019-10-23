@@ -64,7 +64,7 @@ walkscoring <- function(data, id, block, item, choice, walks = 10000,
   # already wide, gather to tidy by default ----
   if (!wide) {
     out <- out %>% 
-      tidyr::gather(item, "walk", -!!sym(id)) %>% 
+      tidyr::gather(!!sym(item), "walk", -!!sym(id)) %>% 
       dplyr::arrange(id)
   }
   
