@@ -10,7 +10,7 @@
 #' @return A tibble with columns for the item and Elo score
 #'
 #' @importFrom magrittr "%>%"
-get_eloscores <- function(eloresults, K = 30, iter = 100) {
+get_eloscores <- function(eloresults, K = 30, iter = 150) {
   out <- dplyr::tibble() # initialize output
   
   for (z in seq_len(iter)) {
@@ -48,7 +48,8 @@ get_eloscores <- function(eloresults, K = 30, iter = 100) {
   # average elo across randomizations
   out <- out %>% 
     dplyr::group_by(item) %>% 
-    dplyr::summarise(elo = mean(elo))
+    dplyr::summarise(elo = mean(elo)) %>% 
+    dplyr::filter(!item %in% c("1839loserdummyy!^", "1839winner!^dummyy"))
   
   return(out)
 }

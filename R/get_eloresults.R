@@ -38,5 +38,15 @@ get_eloresults <- function(data, block, item, choice) {
     )
   }
   
+  # make dummies
+  # nonsense names so no user accidentally has the same issue name
+  results <- dplyr::bind_rows(
+    dplyr::tibble(winner = "1839winner!^dummyy", loser = unique(data[[item]]))
+  ) %>% 
+    dplyr::bind_rows(
+      dplyr::tibble(winner = unique(data[[item]]), loser = "1839loserdummyy!^")
+    ) %>% 
+    dplyr::bind_rows(results)
+  
   return(results)
 }
