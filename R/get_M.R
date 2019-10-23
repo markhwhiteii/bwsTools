@@ -36,7 +36,7 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
   if (bw == "b") {
     for (r in 1:nrow(M)) {
       cn <- rownames(M)[r]
-      for (b in 1:length(unique(data[[block]]))) {
+      for (b in unique(data[[block]])) {
         cb <- data[data[[block]] == b, c(item, choice)] %>% 
           dplyr::group_by(!!sym(item)) %>% 
           dplyr::summarise(score = sum(!!sym(choice)))
@@ -56,7 +56,7 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
   if (bw == "w") {
     for (r in 1:nrow(M)) {
       cn <- rownames(M)[r]
-      for (b in 1:length(unique(data[[block]]))) {
+      for (b in unique(data[[block]])) {
         cb <- data[data[[block]] == b, c(item, choice)] %>% 
           dplyr::group_by(!!sym(item)) %>% 
           dplyr::summarise(score = sum(!!sym(choice)))
