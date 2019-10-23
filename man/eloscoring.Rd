@@ -39,8 +39,10 @@ Calculate individual best-worst scores using Elo scoring. This specific
   application comes from Hollis (2018). It makes each block pairwise
   comparisons and updates Elo scores based on who won and lost those
   comparisons. No ties are considered, which occurs between all of the items
-  that have not been selected as either best or worst. The default K is
-  at 30, per Hollis (2018). Since Elo is temporal in nature, Hollis also
+  that have not been selected as either best or worst. Hollis (2018) also
+  recommends adding two "dummy items": one that defeats every other item,
+  and one that loses to every other item. This is employed here. The default 
+  K is 30, per Hollis (2018). Since Elo is temporal in nature, Hollis also
   recommends running various iterations, each with a different randomization
   of the order of matchups. The default is the 100 used by Hollis. These are 
   averaged together to calculate individual Elo best-worst scores. Elo scores
@@ -64,6 +66,7 @@ eloscoring(indiv, "id", "block", "label", "value", iter = 1)
 Hollis, G. (2018). Scoring best-worst data in unbalanced many-item designs,
   with applications to crowdsourcing semantic judgments. Behavior Research
   Methods, 50(2), 711-729. doi: 10.3758/s13428-017-0898-2
+
 Hollis, G. (2019). The role of number of items per trial in best-worst
   scaling experiments. Behavior Research Methods. doi: 
   10.3758/s13428-019-01270-w

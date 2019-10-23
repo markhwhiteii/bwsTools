@@ -4,7 +4,7 @@
 \alias{get_eloscores}
 \title{Turn Win-Loss Record Data into Elo Scores}
 \usage{
-get_eloscores(eloresults, K = 30, iter = 100)
+get_eloscores(eloresults, K = 30, iter = 150)
 }
 \arguments{
 \item{eloresults}{What get_eloresults() returns}

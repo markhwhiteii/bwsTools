@@ -4,7 +4,7 @@
 \alias{walkscoring}
 \title{Walkscoring Method to Calculate Individual Best-Worst Scores}
 \usage{
-walkscoring(data, id, block, item, choice, walks = 10000)
+walkscoring(data, id, block, item, choice, walks = 10000, wide = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
