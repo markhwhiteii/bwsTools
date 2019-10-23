@@ -7,7 +7,7 @@ Tools for Best-Worst Scaling (a.k.a., MaxDiff) Designs
 An in-development version of this package can be installed using the `devtools` package:
 
 ```
-devtools::install_github(markhwhiteii/bwstools)
+devtools::install_github("markhwhiteii/bwstools")
 ```
 
 ### Contents
