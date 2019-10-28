@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_M.R
 \name{get_M}
 \alias{get_M}
-\title{Calculate Adjacency Matrix for Walkscoring Method}
+\title{Calculate Adjacency Matrix for Graphing Methods}
 \usage{
 get_M(data, bw, block, item, choice, normal = TRUE)
 }
