@@ -20,6 +20,6 @@ devtools::install_github("markhwhiteii/bwstools")
 
 ### Future
 
-Planned for 1.0 release:
+Planned before 1.0 release:
 
-- Additional ways to calculate individual-level estimates
+- Better data formatting checks and informative error messages
