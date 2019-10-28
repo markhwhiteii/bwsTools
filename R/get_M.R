@@ -1,4 +1,4 @@
-#' Calculate Adjacency Matrix for Walkscoring Method
+#' Calculate Adjacency Matrix for Graphing Methods
 #'
 #' @description 
 #' Takes best-worst scoring data in tidy format and transforms the relations
