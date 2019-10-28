@@ -16,7 +16,7 @@ devtools::install_github("markhwhiteii/bwstools")
 
 - Individual estimates, based on: difference scores (best minus worst) using `diffscoring()`, random walks in directed networks using `walkscoring()`, empirical Bayes using `e_bayescoring()`, and Elo scores using `eloscoring()`
 
-- A data.frame of balanced incomplete block designs for creating these studies, and a function to generate a balanced incomplete block design from this
+- A data.frame of balanced incomplete block designs for creating these studies, `bibds`, and a function to generate a balanced incomplete block design from this, `make_bibd()`
 
 ### Future
 
