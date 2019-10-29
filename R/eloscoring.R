@@ -61,6 +61,9 @@
 eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
                        wide = FALSE) {
   
+  # check data ----
+  get_checks(data, id, block, item, choice)
+  
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(cid) {
     get_eloresults(data[data[[id]] == cid, ], block, item, choice) %>% 

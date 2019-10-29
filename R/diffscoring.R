@@ -15,6 +15,7 @@
 #'
 #' @param data A data.frame of the type described in details.
 #' @param id A string of the name of the id column.
+#' @param block A string of the name of the block column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
 #' @param std Logical of whether or not one wants to standardize the data to
@@ -45,11 +46,13 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym
 #' @export
-diffscoring <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
+diffscoring <- function(data, id, block, item, choice, std = FALSE, 
+                        wide = FALSE) {
   
-  if (!all(data[[choice]] %in% -1:1))
-    stop("The choice column must consist of only -1s, 0s, and 1s")
+  # check data ----
+  get_checks(data, id, block, item, choice)
   
+  # get differences ----
   out <- data %>%
     dplyr::group_by(!!sym(id), !!sym(item)) %>%
     dplyr::summarise(
@@ -57,11 +60,13 @@ diffscoring <- function(data, id, item, choice, std = FALSE, wide = FALSE) {
     ) %>%
     dplyr::ungroup()
   
+  # standardize, if requested ----
   if (std) {
     key <- c(table(data[[item]]) / length(unique(data[[id]])))
     out$bws <- out$bws / key[out[[item]]]
   }
   
+  # spread, if requested ----
   if (wide) {
     out <- tidyr::spread(out, !!sym(item), bws)
   }

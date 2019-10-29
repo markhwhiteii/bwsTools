@@ -41,6 +41,9 @@
 #' @export
 prscoring <- function(data, id, block, item, choice, ..., wide = FALSE) {
   
+  # check data ----
+  get_checks(data, id, block, item, choice)
+  
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(x) {
     B <- get_prscores(

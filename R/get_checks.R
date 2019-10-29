@@ -1,5 +1,4 @@
 # TODO: add documentation
-# TODO: need to add "id" to diffscoring and e_bayescoring for this to work
 get_checks <- function(data, id, block, item, choice) {
   
   # only -1, 0, and 1 ----
