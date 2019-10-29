@@ -66,7 +66,7 @@ e_bayescoring <- function(data, id, block, item, choice, E = .01,
     dplyr::summarise(
       bests = sum(!!sym(choice) == 1), 
       worsts = sum(!!sym(choice) == -1), 
-      all = n()
+      all = dplyr::n()
     ) %>% 
     dplyr::mutate(p_j = (all - worsts + bests) / (2 * all)) %>% # equation 4
     dplyr::select(!!sym(item), p_j)
@@ -77,7 +77,7 @@ e_bayescoring <- function(data, id, block, item, choice, E = .01,
     dplyr::summarise(
       bests = sum(!!sym(choice) == 1), 
       worsts = sum(!!sym(choice) == -1), 
-      all = n()
+      all = dplyr::n()
     ) %>% 
     dplyr::mutate(p_ij = (all - worsts + bests) / (2 * all)) %>% # equation 4
     dplyr::ungroup() %>% 

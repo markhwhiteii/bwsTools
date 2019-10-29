@@ -69,8 +69,8 @@ eloscoring <- function(data, id, block, item, choice, K = 30, iter = 100,
     get_eloresults(data[data[[id]] == cid, ], block, item, choice) %>% 
       get_eloscores(K, iter) %>% 
       dplyr::mutate(id = cid)
-  }) %>% 
-    do.call(dplyr::bind_rows, .)
+  })
+  out <- do.call(dplyr::bind_rows, out)
   
   # tidy results ----
   out <- out %>% 
