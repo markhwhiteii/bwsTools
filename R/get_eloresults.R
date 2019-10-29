@@ -3,7 +3,6 @@
 #' Takes tidy data and prepares it for Elo scoring in get_eloscores()
 #' 
 #' @param data A data.frame of the type described in details.
-#' @param id A string of the name of the id column.
 #' @param block A string of the name of the block column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
