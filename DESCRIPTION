@@ -1,11 +1,22 @@
+Type: Package
 Package: bwstools
-Title: Tools for Best-Worst Scaling (a.k.a., MaxDiff) Designs
+Title: Tools for Best-Worst Scaling (MaxDiff) Designs
 Version: 0.1
-Authors@R: person("Mark", "White", email = "markhwhiteii@gmail.com",
+Authors@R: person(given = "Mark", family = "White", email = "markhwhiteii@gmail.com",
                   role = c("aut", "cre"))
-Description: This package contains tools for designing and analyzing best-worst scaling
-Depends: R (>= 3.6.1)
+Description: Tools for making and analyzing best-worst scaling designs
 License: MIT
+URL: https://github.com/markhwhiteii/bwstools
+BugReports: https://github.com/markhwhiteii/bwstools/issues
+Depends: 
+    R (>= 3.6.1)
+Imports: 
+    crossdes,
+    dplyr,
+    igraph, 
+    magrittr, 
+    rlang,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
