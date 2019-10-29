@@ -4,8 +4,8 @@ Title: Tools for Best-Worst Scaling (MaxDiff) Designs
 Version: 0.1
 Authors@R: person(given = "Mark", family = "White", email = "markhwhiteii@gmail.com",
                   role = c("aut", "cre"))
-Description: Tools for making and analyzing best-worst scaling designs
-License: MIT
+Description: The functions in this package are tools used for making and analyzing best-worst scaling designs.
+License: MIT + file LICENSE
 URL: https://github.com/markhwhiteii/bwstools
 BugReports: https://github.com/markhwhiteii/bwstools/issues
 Depends: 
