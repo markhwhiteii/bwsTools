@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 URL: https://github.com/markhwhiteii/bwstools
 BugReports: https://github.com/markhwhiteii/bwstools/issues
 Depends: 
-    R (>= 3.6.1)
+    R (>= 3.6.0)
 Imports: 
     crossdes,
     dplyr,
