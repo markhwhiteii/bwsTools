@@ -1,4 +1,17 @@
-# TODO: add documentation
+#' Perform Checks That Data Follows Best Worst Scaling Design
+#' 
+#' @details
+#' This function requires data to be in a specified format. Each row must
+#'   represent a respondent-block-label combination. That is, it indicates
+#'   the person, the block (or trial), the item that was judged, and a column
+#'   indicating whether it was chosen as best (+1), worst (-1), or wasn't 
+#'   selected as either (0).
+#' 
+#' @param data A data.frame of the type described in details.
+#' @param id A string of the name of the id column.
+#' @param block A string of the name of the block column.
+#' @param item A string of the name of the item column.
+#' @param choice A string of the name of the choice column.
 get_checks <- function(data, id, block, item, choice) {
   
   # only -1, 0, and 1 ----
