@@ -14,6 +14,11 @@
 #' @param choice A string of the name of the choice column.
 get_checks <- function(data, id, block, item, choice) {
   
+  # columns ----
+  if (!all(c(id, block, item, choice) %in% names(data))) {
+    stop("Data must contain ", id, ", ", block, ", ", item, ", ", choice)
+  }
+  
   # only -1, 0, and 1 ----
   if (!all(data[[choice]] %in% -1:1)) {
     stop("'", choice, "' column must only contain -1, 0, or 1")
@@ -54,36 +59,16 @@ get_checks <- function(data, id, block, item, choice) {
   }
   
   # every pairwise item comparison must appear ----
-  # TODO: takes far too long
   test <- sapply(unique(data[[id]]), function(x) {
-    
-    # make table of pairwise comparisons
-    pcomps <- as.data.frame(
-      t(combn(unique(data[[item]]), 2)), 
-      stringsAsFactors = FALSE
+    tmp <- crossprod(
+      table(
+        data[[block]][data[[id]] == x], 
+        data[[item]][data[[id]] == x]
+      )
     )
-    pcomps$V3 <- FALSE
-    
-    # get data for just this id
-    tmp <- data[data[[id]] == x, ]
-    
-    # for every block, check off the pairwise comparisons that occur
-    for (y in unique(data[[block]])) {
-      # current items
-      ci <- tmp[tmp[[block]] == y, item, drop = TRUE]
-      # mark as true if that pairwise comparison appears
-      for (z in seq_len(nrow(pcomps))) {
-        if ((pcomps[z, 1] %in% ci) & (pcomps[z, 2] %in% ci)) {
-          pcomps[z, 3] <- TRUE
-        }
-      }
-    }
-    
-    # return true if all appear
-    all(pcomps$V3)
+    any(tmp == 0)
   })
-  if (!all(test)) {
+  if (any(test)) {
     stop("Each pairwise comparison between items must occur for every id")
   }
-  
 }
