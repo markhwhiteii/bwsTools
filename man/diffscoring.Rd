@@ -47,8 +47,8 @@ This function requires data to be in a specified format. Each row must
 \examples{
 data(indiv)
 head(indiv)
-diffscoring(indiv, "id", "label", "value")
-diffscoring(indiv, "id", "label", "value", TRUE, TRUE)
+diffscoring(indiv, "id", "block", "label", "value")
+diffscoring(indiv, "id", "block", "label", "value", TRUE, TRUE)
 
 }
 \references{

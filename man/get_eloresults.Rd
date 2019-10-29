@@ -14,8 +14,6 @@ get_eloresults(data, block, item, choice)
 \item{item}{A string of the name of the item column.}
 
 \item{choice}{A string of the name of the choice column.}
-
-\item{id}{A string of the name of the id column.}
 }
 \value{
 A tibble with columns of winners and losers to score.

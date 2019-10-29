@@ -59,7 +59,7 @@ This function requires data to be in a specified format. Each row must
 \examples{
 data(indiv)
 head(indiv)
-e_bayescoring(indiv, "id", "label", "value")
+e_bayescoring(indiv, "id", "block", "label", "value")
 
 }
 \references{
