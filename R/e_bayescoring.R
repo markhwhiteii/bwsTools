@@ -44,7 +44,7 @@
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' e_bayescoring(indiv, "id", "label", "value")
+#' e_bayescoring(indiv, "id", "block", "label", "value")
 #' 
 #' @references 
 #' Lipovetsky, S., & Conklin, M. (2015). MaxDiff priority estimations with and

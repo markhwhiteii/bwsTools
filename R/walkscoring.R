@@ -31,7 +31,7 @@
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' # use more than 100 walks; only using 10 here for speed
+#' # use more than 100 walks; only using 100 here for speed
 #' walkscoring(indiv, "id", "block", "label", "value", 100)
 #' 
 #' @references 

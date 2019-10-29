@@ -34,8 +34,8 @@
 #' @examples
 #' data(indiv)
 #' head(indiv)
-#' diffscoring(indiv, "id", "label", "value")
-#' diffscoring(indiv, "id", "label", "value", TRUE, TRUE)
+#' diffscoring(indiv, "id", "block", "label", "value")
+#' diffscoring(indiv, "id", "block", "label", "value", TRUE, TRUE)
 #' 
 #' @references 
 #' Louviere, J., Lings, I., Islam, T., Gudergan, S., & Flynn (2013). An
