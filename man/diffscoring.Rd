@@ -4,12 +4,14 @@
 \alias{diffscoring}
 \title{Difference Method to Calculate Individual Best-Worst Scores}
 \usage{
-diffscoring(data, id, item, choice, std = FALSE, wide = FALSE)
+diffscoring(data, id, block, item, choice, std = FALSE, wide = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
 
 \item{id}{A string of the name of the id column.}
+
+\item{block}{A string of the name of the block column.}
 
 \item{item}{A string of the name of the item column.}
 

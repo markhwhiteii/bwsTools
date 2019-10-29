@@ -4,13 +4,15 @@
 \alias{e_bayescoring}
 \title{Empirical Bayes Method to Calculate Individual Best-Worst Scores}
 \usage{
-e_bayescoring(data, id, item, choice, E = 0.01, alpha = 0.1,
+e_bayescoring(data, id, block, item, choice, E = 0.01, alpha = 0.1,
   wide = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
 
 \item{id}{A string of the name of the id column.}
+
+\item{block}{A string of the name of the block column.}
 
 \item{item}{A string of the name of the item column.}
 
