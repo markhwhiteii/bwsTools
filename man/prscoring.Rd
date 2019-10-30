@@ -32,7 +32,12 @@ A data.frame containing the id and item columns as well as a "walk" column
 }
 \description{
 Caclulate best-worst scores for each respondent-item combination. This uses
-  the page rank method described in CITE.
+  the page rank method. It works virtually the same as the walkscoring
+  method; the only difference is that there is a parameter for randomly
+  "teleporting" to a random node. This can help prevent random walks
+  from getting "stuck" in certain areas. Page rank scores using are
+  calculated and snythesized in the same way as the method used in
+  walkscoring().
 }
 \details{
 This function requires data to be in a specified format. Each row must
@@ -48,5 +53,8 @@ prscoring(indiv, "id", "block", "label", "value")
 
 }
 \references{
-INSERT CITE LATER.
+Brin, S., & Page, L. (1998). The anatomy of a large-scale hypertextual
+  Web search engine. Computer Networks and ISDN Systems, 30(1), 107-117.
+
+Gleich, D. F. (2014). PageRank beyond the Web. arxiv.org/abs/1407.5107
 }
