@@ -12,8 +12,8 @@
 #'
 #' @export
 make_bibd <- function(design) {
-  tmp <- data("bibds", package = "bwstools")
-  tmp <- tmp[tmp$design == design, ]
+  data("bibds", package = "bwstools", envir = environment())
+  tmp <- bibds[bibds$design == design, ]
   out <- crossdes::find.BIB(tmp$t, tmp$b, tmp$k)
   colnames(out) <- paste0("Option", 1:ncol(out))
   rownames(out) <- 1:nrow(out)
