@@ -2,7 +2,7 @@
 #'
 #' @description 
 #' Caclulate best-worst scores for each respondent-item combination. This uses
-#'   the walkscoring method describe in CITE.
+#'   the walkscoring method described in White (2019).
 #'
 #' @details
 #' This function requires data to be in a specified format. Each row must
@@ -35,7 +35,8 @@
 #' walkscoring(indiv, "id", "block", "label", "value", 100)
 #' 
 #' @references 
-#' INSERT MY PAPER HERE LATER.
+#' White, M. H., II. (2019). bwstools: An R package for case 1 best-worst
+#'   scaling. Retrieved from https://osf.io/xftvq/
 #' 
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym

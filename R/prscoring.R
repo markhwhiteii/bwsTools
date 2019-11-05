@@ -7,7 +7,7 @@
 #'   "teleporting" to a random node. This can help prevent random walks
 #'   from getting "stuck" in certain areas. Page rank scores using are
 #'   calculated and snythesized in the same way as the method used in
-#'   walkscoring().
+#'   walkscoring(). See White (2019).
 #'
 #' @details
 #' This function requires data to be in a specified format. Each row must
@@ -43,6 +43,9 @@
 #'   Web search engine. Computer Networks and ISDN Systems, 30(1), 107-117.
 #' 
 #' Gleich, D. F. (2014). PageRank beyond the Web. arxiv.org/abs/1407.5107
+#' 
+#' White, M. H., II. (2019). bwstools: An R package for case 1 best-worst
+#'   scaling. Retrieved from https://osf.io/xftvq/
 #' 
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym
