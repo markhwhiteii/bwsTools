@@ -9,5 +9,7 @@ There was 1 NOTE:
 
 * checking CRAN incoming feasibility ... NOTE
 
+        This NOTE indicates that it is a new submission.
+
 ## Downstream dependencies
 There are no packages depending on this package.
