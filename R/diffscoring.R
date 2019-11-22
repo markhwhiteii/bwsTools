@@ -1,7 +1,7 @@
 #' Difference Method to Calculate Individual Best-Worst Scores
 #'
 #' @description 
-#' Caclulate best-worst scores for each respondent-item combination. This is
+#' Calculate best-worst scores for each respondent-item combination. This is
 #'   simply taking the total number of times a respondent selected the item
 #'   as "best" and subtracting from that the number of times a respondent
 #'   selected the item as "worst" (Louviere et al., 2013).
@@ -23,7 +23,7 @@
 #' @param wide Logical of whether or not one wants the data returned in long
 #'   (each row is an item-respondent combination and all best-worst scores are
 #'   in the same column) format (FALSE) or in wide format (where each row is a 
-#'   respondent, and the best-wost scores for the items are in their own 
+#'   respondent, and the best-worst scores for the items are in their own 
 #'   columns). See the `indiv` data as an example.
 #' 
 #' @return

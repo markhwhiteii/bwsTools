@@ -22,7 +22,7 @@ walkscoring(data, id, block, item, choice, walks = 10000, wide = FALSE)
 \item{wide}{Logical of whether or not one wants the data returned in long
 (each row is an item-respondent combination and all best-worst scores are
 in the same column) format (FALSE) or in wide format (where each row is a 
-respondent, and the best-wost scores for the items are in their own 
+respondent, and the best-worst scores for the items are in their own 
 columns). See the `indiv` data as an example.}
 }
 \value{
@@ -31,7 +31,7 @@ A data.frame containing the id and item columns as well as a "walk" column
   has its own column and the walkscore is filled-in those columns.
 }
 \description{
-Caclulate best-worst scores for each respondent-item combination. This uses
+Calculate best-worst scores for each respondent-item combination. This uses
   the walkscoring method described in White (2019).
 }
 \details{
@@ -49,6 +49,6 @@ walkscoring(indiv, "id", "block", "label", "value", 100)
 
 }
 \references{
-White, M. H., II. (2019). bwstools: An R package for case 1 best-worst
+White, M. H., II. (2019). bwsTools: An R package for case 1 best-worst
   scaling. Retrieved from https://osf.io/xftvq/
 }
