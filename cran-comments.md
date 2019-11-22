@@ -1,6 +1,7 @@
 ## Test environments
 * local macOS Mojave 10.14.6 install, R 3.6.1
 * win-builder, via devtools::check_win_devel(), devtools::check_win_release()
+* Windows Sever 08, Ubuntu Linux, Fedora Linux, via devtools::check_rhub()
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
