@@ -4,7 +4,12 @@ Title: Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
 Version: 1.0.1
 Authors@R: person(given = "Mark", family = "White", email = "markhwhiteii@gmail.com",
                   role = c("aut", "cre"))
-Description: The functions in this package are tools used for making and analyzing best-worst scaling designs.
+Description: Tools to design best-worst scaling designs (i.e., balanced incomplete block designs) and
+    to analyze data from these designs, using aggregate and individual methods such as: difference 
+    scores, Louviere, Lings, Islam, Gudergan, & Flynn (2013) <doi:10.1016/j.ijresmar.2012.10.002>; 
+    analytical estimation, Lipovetsky & Conklin (2014) <doi:10.1016/j.jocm.2014.02.001>; empirical 
+    Bayes, Lipovetsky & Conklin (2015) <doi:10.1142/S1793536915500028>; Elo, Hollis (2018) 
+    <doi:10.3758/s13428-017-0898-2>; and network-based measures.
 License: MIT + file LICENSE
 URL: https://github.com/markhwhiteii/bwsTools
 BugReports: https://github.com/markhwhiteii/bwsTools/issues
