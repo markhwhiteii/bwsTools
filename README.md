@@ -1,5 +1,9 @@
 # bwsTools
 
+
+<img src="https://www.r-pkg.org/badges/version/bwsTools"> <img src="https://cranlogs.r-pkg.org/badges/grand-total/bwsTools">
+
+
 Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
 
 ### Installation
