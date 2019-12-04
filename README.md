@@ -4,10 +4,8 @@ Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
 
 ### Installation
 
-An in-development version of this package can be installed using the `devtools` package:
-
 ```
-devtools::install_github("markhwhiteii/bwsTools")
+install.packages("bwsTools")
 ```
 
 ### Contents
