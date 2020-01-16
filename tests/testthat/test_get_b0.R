@@ -1,6 +1,17 @@
 context("Compute one b and SE from counts")
 library(bwsTools)
 
+test_that("calculations are being done correctly", {
+  expect_equal(
+    round(get_b0(7145, 1733, 1324), 3), 
+    c(b = .115, se = .017)
+  )
+  expect_equal(
+    round(get_b0(100, 40, 10), 3), 
+    c(b = .619, se = .148)
+  )
+})
+
 test_that("correct inputs return named double vector of length two", {
   expect_length(get_b0(7145, 1733, 1324), 2)
   expect_length(get_b0(1000, 333, 333), 2)
