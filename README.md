@@ -12,6 +12,10 @@ Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
 install.packages("bwsTools")
 ```
 
+### Tutorial
+
+A paper introducing the paper, which also shows basic usage information, can be found at the Open Science Framework: https://osf.io/xftvq/
+
 ### Contents
 
 - Aggregate estimates, based on: analytical estimation of the multinomial logit model using `ae_mnl()`
