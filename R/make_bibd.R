@@ -12,6 +12,9 @@
 #'
 #' @export
 make_bibd <- function(design) {
+  
+  if (!design %in% 1:32) stop("Enter an integer from 1 to 32")
+  
   utils::data("bibds", package = "bwsTools", envir = environment())
   tmp <- bibds[bibds$design == design, ]
   out <- crossdes::find.BIB(tmp$t, tmp$b, tmp$k)

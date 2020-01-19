@@ -40,6 +40,15 @@
 #' 
 #' @export
 ae_mnl <- function(data, totals, bests, worsts, z = 1.96) {
+
+  if (!"data.frame" %in% class(data)) {
+    stop("data must be a data.frame")
+  }
+  
+  if (!all(c(totals, bests, worsts) %in% names(data))) {
+    stop(totals, ", ", bests, ", or ", worsts, " aren't in the data")
+  }
+  
   out <- get_b(data, totals, bests, worsts, z)
   out$choice_p <- get_choice_p(out$b)
   

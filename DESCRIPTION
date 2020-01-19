@@ -14,7 +14,7 @@ License: MIT + file LICENSE
 URL: https://github.com/markhwhiteii/bwsTools
 BugReports: https://github.com/markhwhiteii/bwsTools/issues
 Depends: 
-    R (>= 3.6.0)
+    R (>= 3.5.0)
 Imports: 
     crossdes,
     dplyr,
@@ -25,3 +25,5 @@ Imports:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Suggests: 
+    testthat

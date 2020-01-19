@@ -18,6 +18,15 @@
 #' @return A named numeric vector of length 2, containing the utility
 #' coefficient (b) and its associated standard error (se)
 get_b0 <- function(total, best, worst) {
+  
+  if (total < 0 | best < 0 | worst < 0) {
+    stop("A total, best, or worst number cannot be less than zero.")
+  }
+  
+  if (total < best + worst) {
+    stop("Total cannot be less than the sum of best and worst.")
+  }
+  
   n_j <- total
   n_jw <- worst
   n_jb <- best
