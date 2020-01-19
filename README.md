@@ -1,7 +1,7 @@
 # bwsTools
 
 
-<img src="https://www.r-pkg.org/badges/version/bwsTools"> <img src="https://cranlogs.r-pkg.org/badges/grand-total/bwsTools">
+<img src="https://www.r-pkg.org/badges/version/bwsTools"> <img src="https://cranlogs.r-pkg.org/badges/grand-total/bwsTools"> [![Build Status](https://travis-ci.org/markhwhiteii/bwsTools.svg?branch=master)](https://travis-ci.org/markhwhiteii/bwsTools) <img src="https://codecov.io/gh/markhwhiteii/bwsTools/branch/master/graph/badge.svg">
 
 
 Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
