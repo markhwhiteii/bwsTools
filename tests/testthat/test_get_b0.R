@@ -26,19 +26,19 @@ test_that("correct inputs return named double vector of length two", {
   expect_named(get_b0(1000, 900, 1), c("b", "se"))
 })
 
-test_that("NAs return NA", {
-  expect_true(all(is.na(get_b0(7145, 1733, NA))))
-  expect_true(all(is.na(get_b0(1000, NA, 333))))
-  expect_true(all(is.na(get_b0(NA, 900, 1))))
-  expect_true(all(is.na(get_b0(NA, 1733, NA))))
-  expect_true(all(is.na(get_b0(NA, NA, NA))))
+test_that("NAs return error", {
+  expect_error(all(is.na(get_b0(7145, 1733, NA))))
+  expect_error(all(is.na(get_b0(1000, NA, 333))))
+  expect_error(all(is.na(get_b0(NA, 900, 1))))
+  expect_error(all(is.na(get_b0(NA, 1733, NA))))
+  expect_error(all(is.na(get_b0(NA, NA, NA))))
 })
 
 test_that("errors or warnings are thrown when wrong types are input", {
   expect_error(get_b0("7145", 1733, 1324))
   expect_error(get_b0(7145, "1733", 1324))
   expect_error(get_b0(7145, "1733", 1324))
-  expect_warning(get_b0(factor("7145"), factor("1733"), factor("1324")))
+  expect_error(get_b0(factor("7145"), factor("1733"), factor("1324")))
 })
 
 test_that("warning thrown when totals < bests + worsts", {
