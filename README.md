@@ -14,7 +14,7 @@ install.packages("bwsTools")
 
 ### Tutorial
 
-A paper introducing the paper, which also shows basic usage information, can be found at the Open Science Framework: https://osf.io/xftvq/
+A paper introducing the package and showing basic usage information can be found at the Open Science Framework: https://osf.io/xftvq/
 
 ### Contents
 
