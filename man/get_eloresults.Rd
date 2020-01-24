@@ -4,7 +4,7 @@
 \alias{get_eloresults}
 \title{Transform Tidy Data into Winners and Losers Data}
 \usage{
-get_eloresults(data, block, item, choice)
+get_eloresults(data, block, item, choice, aggregate = FALSE, id = NULL)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
@@ -14,6 +14,8 @@ get_eloresults(data, block, item, choice)
 \item{item}{A string of the name of the item column.}
 
 \item{choice}{A string of the name of the choice column.}
+
+\item{aggregate}{A logical indicating if this is for aggregate scores.}
 }
 \value{
 A tibble with columns of winners and losers to score.

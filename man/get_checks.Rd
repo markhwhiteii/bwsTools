@@ -4,7 +4,7 @@
 \alias{get_checks}
 \title{Perform Checks That Data Follows Best Worst Scaling Design}
 \usage{
-get_checks(data, id, block, item, choice)
+get_checks(data, id, block, item, choice, aggregate = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
