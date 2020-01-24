@@ -6,10 +6,15 @@
 #' @param block A string of the name of the block column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
-#' 
+#' @param aggregate A logical indicating if this is for aggregate scores.
 #' @return A tibble with columns of winners and losers to score.
-get_eloresults <- function(data, block, item, choice) {
+get_eloresults <- function(data, block, item, choice, aggregate = FALSE,
+                           id = NULL) {
   results <- dplyr::tibble() # initialize results
+  
+  if (aggregate) {
+    data[[block]] <- paste(data[[id]], data[[block]], sep = "_") # recode block
+  }
   
   for (b in sort(unique(data[[block]]))) {
     cb <- data[data[[block]] == b, ] # current block
