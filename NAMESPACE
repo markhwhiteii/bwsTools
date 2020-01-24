@@ -3,6 +3,7 @@
 export(ae_mnl)
 export(diffscoring)
 export(e_bayescoring)
+export(elo)
 export(eloscoring)
 export(make_bibd)
 export(prscoring)
