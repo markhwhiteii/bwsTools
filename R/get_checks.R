@@ -14,7 +14,7 @@
 #' @param choice A string of the name of the choice column.
 #' @param aggregate A logical indicating whether or not these are for aggregate,
 #'   non-BIBD data. Defaults to FALSE for backward compatability.
-#' 
+#' @noRD
 get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
   
   # columns ----

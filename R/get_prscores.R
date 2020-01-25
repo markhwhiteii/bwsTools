@@ -6,8 +6,8 @@
 #' @param M An adjacency matrix, such as produced by get_M.
 #' @param ... Arguments to igraph::page_rank
 #' 
-#' @return
-#' A named numeric vecor indicating page rank score.
+#' @return A named numeric vecor indicating page rank score.
+#' @noRD
 get_prscores <- function(M, ...) {
   
   # initialize all zeros, in case node is never reached ----

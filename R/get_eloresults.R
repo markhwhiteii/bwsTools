@@ -10,6 +10,7 @@
 #' @param id A string indicating the name of the id column. Not necessary for
 #'   individual-level scores and is ignored.
 #' @return A tibble with columns of winners and losers to score.
+#' @noRD
 get_eloresults <- function(data, block, item, choice, aggregate = FALSE,
                            id = NULL) {
   results <- dplyr::tibble() # initialize results
