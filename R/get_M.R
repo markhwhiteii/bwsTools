@@ -24,7 +24,7 @@
 #' 
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym
-#' @noRD
+#' @noRd
 get_M <- function(data, bw, block, item, choice, normal = TRUE) {
   
   # prepare matrix ----

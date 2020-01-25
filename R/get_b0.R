@@ -17,7 +17,7 @@
 #' 
 #' @return A named numeric vector of length 2, containing the utility
 #' coefficient (b) and its associated standard error (se)
-#' @noRD
+#' @noRd
 get_b0 <- function(total, best, worst) {
   
   if (total < 0 | best < 0 | worst < 0) {

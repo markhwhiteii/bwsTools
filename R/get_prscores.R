@@ -7,7 +7,7 @@
 #' @param ... Arguments to igraph::page_rank
 #' 
 #' @return A named numeric vecor indicating page rank score.
-#' @noRD
+#' @noRd
 get_prscores <- function(M, ...) {
   
   # initialize all zeros, in case node is never reached ----

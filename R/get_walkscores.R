@@ -8,7 +8,7 @@
 #' 
 #' @return
 #' A named numeric vecor indicating proportion of time a walk led to each node.
-#' @noRD
+#' @noRd
 get_walkscores <- function(M, walks) {
   
   # initialize all zeros, in case node is never reached ----
