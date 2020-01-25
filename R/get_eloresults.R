@@ -7,6 +7,8 @@
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
 #' @param aggregate A logical indicating if this is for aggregate scores.
+#' @param id A string indicating the name of the id column. Not necessary for
+#'   individual-level scores and is ignored.
 #' @return A tibble with columns of winners and losers to score.
 get_eloresults <- function(data, block, item, choice, aggregate = FALSE,
                            id = NULL) {
