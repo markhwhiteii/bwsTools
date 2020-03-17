@@ -1,0 +1,54 @@
+---
+title: "Calculating Aggregate Scores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calculating Aggregate Scores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bwsTools)
+library(dplyr)
+library(tidyr)
+```
+
+```{r make_data}
+dat <- vdata %>% 
+  group_by(issue) %>% 
+  summarise(
+    t = n(),
+    b = sum(value == 1),
+    w = sum(value == -1)
+  )
+```
+
+```{r ae_mnl}
+res1 <- ae_mnl(dat, "t", "b", "w")
+
+dat %>% 
+  bind_cols(res1) %>% 
+  arrange(b1) %>% 
+  mutate(issue = factor(issue, issue)) %>% 
+  ggplot(aes(x = issue, y = b1)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = lb, ymax = ub), width = 0) +
+  coord_flip()
+```
+
+```{r elo}
+set.seed(1839)
+res2 <- elo(vdata, "id", "block", "issue", "value")
+res2
+```
+
+```{r correl}
+plot(res1$b, res2$elo)
+```

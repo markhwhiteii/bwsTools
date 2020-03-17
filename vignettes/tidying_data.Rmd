@@ -1,0 +1,142 @@
+---
+title: "Tidying Data for Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tidying Data for Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, warning = FALSE, message = FALSE}
+library(bwsTools)
+library(dplyr)
+library(tidyr)
+```
+
+```{r make_data, include = FALSE}
+dat1 <- tibble(
+  pid = 1:3,
+  
+  q1_1 = c(2,  2,   2),
+  q1_2 = c(NA, NA,  1),
+  q1_3 = c(1,  1,  NA),
+  
+  q2_1 = c(1,  1,  NA),
+  q2_2 = c(2,  NA,  1),
+  q2_3 = c(NA, 2,   2),
+  
+  q3_1 = c(NA, 1,   2),
+  q3_2 = c(2,  2,   1),
+  q3_3 = c(1,  NA, NA),
+  
+  q4_1 = c(NA,  2,  2),
+  q4_2 = c(2,   1,  1),
+  q4_3 = c(1,  NA,  NA),
+)
+
+key <- tibble(
+  q = names(dat1)[-1],
+  label = c("Steak N Shake", "Shake Shack", "Whataburger",
+            "Culvers", "Shake Shack", "Whataburger",
+            "Steak N Shake", "Culvers", "Shake Shack",
+            "Steak N Shake", "Culvers",  "Whataburger")
+)
+
+dat2 <- tibble(
+  pid = 1:3,
+  
+  q1_i1_y = c(2,  2,   2),
+  q1_i1_t = rep("Steak N Shake", 3),
+  q1_i2_y = c(NA, NA,  1),
+  q1_i2_t = rep("Shake Shack", 3),
+  q1_i3_y = c(1,  1,  NA),
+  q1_i3_t = rep("Whataburger", 3),
+  
+  q2_i1_y = c(1,  1,  NA),
+  q2_i1_t = rep("Culvers", 3),
+  q2_i2_y = c(2,  NA,  1),
+  q2_i2_t = rep("Shake Shack", 3),
+  q2_i3_y = c(NA, 2,   2),
+  q2_i3_t = rep("Whataburger", 3),
+  
+  q3_i1_y = c(NA, 1,   2),
+  q3_i1_t = rep("Steak N Shake", 3),
+  q3_i2_y = c(2,  2,   1),
+  q3_i2_t = rep("Culvers", 3),
+  q3_i3_y = c(1,  NA, NA),
+  q3_i3_t = rep("Shake Shack", 3),
+  
+  q4_i1_y = c(NA,  2,  2),
+  q4_i1_t = rep("Steak N Shake", 3),
+  q4_i2_y = c(2,   1,  1),
+  q4_i2_t = rep("Culvers", 3),
+  q4_i3_y = c(1,  NA,  NA),
+  q4_i3_t = rep("Whataburger", 3),
+)
+```
+
+```{r dat1}
+dat1
+
+names(dat1)
+
+key
+
+dat1_i <- dat1 %>% 
+  gather("q", "resp", -pid) %>% 
+  mutate(
+    resp = case_when(
+      resp == 2 ~ 1,
+      resp == 1 ~ -1,
+      is.na(resp) ~ 0
+    )
+  ) %>% 
+  left_join(key, by = "q") %>% 
+  separate(q, c("block", "temp"), sep = "_") %>% 
+  select(-temp)
+
+dat1_a <- dat1_i %>% 
+  group_by(label) %>% 
+  summarise(
+    total = n(),
+    best = sum(resp == 1),
+    worst = sum(resp == -1),
+  )
+
+res1_i <- e_bayescoring(dat1_i, "pid", "block", "label", "resp")
+head(res1_i)
+
+dat1 <- e_bayescoring(dat1_i, "pid", "block", "label", "resp", wide = TRUE) %>% 
+  left_join(dat1, by = "pid")
+head(dat1)
+
+(res1_a <- ae_mnl(dat1_a, "total", "best", "worst"))
+```
+
+```{r dat2}
+dat2
+
+names(dat2)
+
+dat2_i <- dat2 %>% 
+  gather("temp", "value", -pid) %>% 
+  separate(temp, c("block", "item", "t_or_y")) %>% 
+  spread(t_or_y, value) %>% 
+  mutate(
+    y = case_when(
+      y == 2 ~ 1,
+      y == 1 ~ -1,
+      is.na(y) ~ 0
+    )
+  ) %>% 
+  select(-item)
+
+dat2_i
+```
