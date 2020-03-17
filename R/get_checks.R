@@ -12,7 +12,10 @@
 #' @param block A string of the name of the block column.
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
-get_checks <- function(data, id, block, item, choice) {
+#' @param aggregate A logical indicating whether or not these are for aggregate,
+#'   non-BIBD data. Defaults to FALSE for backward compatability.
+#' @noRd
+get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
   
   # columns ----
   if (!all(c(id, block, item, choice) %in% names(data))) {
@@ -36,12 +39,13 @@ get_checks <- function(data, id, block, item, choice) {
   }
   
   # every block needs same amount of options ----
-  if (length(unique(table(data[[id]], data[[block]]))) > 1) {
+  if (!aggregate && length(unique(table(data[[id]], data[[block]]))) > 1) {
     stop("Each block for each id must have same amount of items")
   }
   
   # every id needs same amount of blocks ----
-  if (length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
+  if (!aggregate && 
+      length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
     stop("Each id must have the same amount of blocks")
   }
   
@@ -54,7 +58,7 @@ get_checks <- function(data, id, block, item, choice) {
   test <- lapply(unique(data[[id]]), function(x) {
     sort(unique(data[[item]][data[[id]] == x]))
   })
-  if (!all(Vectorize(identical, "x")(test, test[[1]]))) {
+  if (!aggregate && !all(Vectorize(identical, "x")(test, test[[1]]))) {
     stop("Each id must be rating the same set of items")
   }
   
@@ -68,7 +72,7 @@ get_checks <- function(data, id, block, item, choice) {
     )
     any(tmp == 0)
   })
-  if (any(test)) {
+  if (!aggregate && any(test)) {
     stop("Each pairwise comparison between items must occur for every id")
   }
 }

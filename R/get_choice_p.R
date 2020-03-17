@@ -11,6 +11,7 @@
 #' 60-68. doi: 10.1016/j.jocm.2014.02.001
 #' 
 #' @return A vector of analytically-estimated utility coefficients
+#' @noRd
 get_choice_p <- function(b) {
   exp(b) / sum(exp(b)) # equation 18
 }

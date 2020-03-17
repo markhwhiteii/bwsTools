@@ -15,6 +15,7 @@
 #' 
 #' @return A data frame containing the utility coefficients, standard errors,
 #'   and upper and lower confidence intervals for each item (row) in the data
+#' @noRd
 get_b <- function(data, totals, bests, worsts, z = 1.96) {
   data <- data[, c(totals, bests, worsts)]
   out <- apply(data, 1, function(x) {
