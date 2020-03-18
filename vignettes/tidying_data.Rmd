@@ -148,14 +148,14 @@ dat1_a <- dat1_i %>%
   )
 ```
 
-And you can see below that these now run without any errors:  
+And you can see below that these now run without any errors.  
 
 ```{r it_runs}
 res1_i <- e_bayescoring(dat1_i, "pid", "block", "label", "resp")
 head(res1_i)
 ```
 
-By default, it gets returned in the tidy format. This makes it perfect for plotting. But let's say you wanted to join it back to your original data, because you want to correlate scores with, for example, age. You could specify the format to return as `wide` and then join back to the original data, `dat1`:  
+By default, it gets returned in the tidy format. This makes it perfect for plotting. But let's say you wanted to join it back to your original data, because you want to correlate scores with, for example, age. You could specify the format to return as `wide` and then join back to the original data, `dat1`.   
 
 ```{r join_back}
 dat1 <- e_bayescoring(dat1_i, "pid", "block", "label", "resp", wide = TRUE) %>% 
@@ -193,8 +193,12 @@ dat2_i <- dat2 %>%
   ) %>% 
   # 5. remove the item number column, as it is not needed anymore
   select(-item)
+```
 
+Now, the data are in the correct format for using the `bwsTools` individual scoring functions.  
+
+```{r show dat2_i}
 dat2_i
 ```
 
-Now, the data are in the correct format for using the `bwsTools` individual scoring functions. Using these individual-level data to aggregate up follows the same procedure as above.  
+Using these individual-level data to aggregate up follows the same procedure as above.  
