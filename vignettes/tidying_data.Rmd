@@ -14,7 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-The `bwsTools` package requires data to be in a specified format—but your data might not look like this when you first get it. This vignette looks at two ways best-worst scaling data may be formatted initially and shows how to use the `tidyverse` packages `dplyr` and `tidyr` to get your data into the format that is required for the `bwsTools` functions.  
+The `bwsTools` package requires data to be in a specified format—but your data might not look like this when you first get it. For more on this format, see [the paper introducing this package](https://osf.io/xftvq/) as well as the documentation for what specific functions require.  
+
+This vignette looks at two ways best-worst scaling data may be formatted initially and shows how to use the `tidyverse` packages `dplyr` and `tidyr` to get your data into the format that is required for the `bwsTools` functions.  
 
 First, we load the packages we need:  
 
