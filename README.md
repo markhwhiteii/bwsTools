@@ -18,7 +18,7 @@ A paper introducing the package and showing basic usage information can be found
 
 ### Contents
 
-- Aggregate estimates, based on: analytical estimation of the multinomial logit model using `ae_mnl()`
+- Aggregate estimates, based on: analytical estimation of the multinomial logit model using `ae_mnl()` and Elo scores using `elo()`
 
 - Individual estimates, based on: difference scores (best minus worst) using `diffscoring()`, random walks in directed networks using `walkscoring()`, empirical Bayes using `e_bayescoring()`, Elo scores using `eloscoring()`, and page rank scores using `prscoring()`
 
