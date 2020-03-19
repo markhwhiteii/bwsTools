@@ -27,7 +27,7 @@ Each of them takes data in a specified format (see the tidying data vignette). T
 
 We can run all five with their defaults like so:  
 
-```{r run}
+```{r run, eval=FALSE}
 set.seed(1839)
 res1 <- diffscoring(vdata, "id", "block", "issue", "value")
 res2 <- e_bayescoring(vdata, "id", "block", "issue", "value")
@@ -36,22 +36,15 @@ res4 <- walkscoring(vdata, "id", "block", "issue", "value")
 res5 <- prscoring(vdata, "id", "block", "issue", "value")
 ```
 
-In these data, the scores correlate very highly with one another:  
-
-```{r correl}
-res <- list(res1, res2, res3, res4, res5) %>% 
-  Reduce(function(x, y) left_join(x, y, by = c("id", "issue")), .)
-
-round(cor(res[, -1:-2]), 2)
-
-pairs(res[, -1:-2])
-```
-
 One of the most frequent uses of individual-level scores, from my reading of the literature at least, is for creating clusters or latent classes of groups based on these scores. What is nice about the `bwsTools` package is that it returns data that can be then clustered using whatever method you prefer (and with whatever other data you want to include): k-means, latent class analysis, mixture models, DBSCAN, agglomerative clustering—whatever you'd like!  
 
 I will demonstrate unsupervised learning on the empirical Bayes multinomial model scores, using k-means clustering. I use the `NbClust` package to find the best $k$, but I don't include that bit here since it takes some time to calculate. I found that the best $k = 3$ in this situation.   
 
 I take the results and pivot them wide, then run k-means clustering on everything but the identification variable (the first column).  
+
+```{r calc_bayes, include=FALSE}
+res2 <- e_bayescoring(vdata, "id", "block", "issue", "value")
+```
 
 ```{r kmeans}
 res2_wide <- res2 %>% 
