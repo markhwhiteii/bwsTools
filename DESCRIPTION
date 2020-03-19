@@ -1,7 +1,7 @@
 Type: Package
 Package: bwsTools
 Title: Tools for Case 1 Best-Worst Scaling (MaxDiff) Designs
-Version: 1.0.1.9000
+Version: 1.1.0
 Authors@R: person(given = "Mark", family = "White", email = "markhwhiteii@gmail.com",
                   role = c("aut", "cre"))
 Description: Tools to design best-worst scaling designs (i.e., balanced incomplete block designs) and
