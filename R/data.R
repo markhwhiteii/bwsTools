@@ -33,3 +33,10 @@
 #'   submitted to an aggregate scoring function that is NOT ae_mnl(), which
 #'   assumes a balanced incomplete block design (BIBD).
 "agg"
+
+#' Example Data Used in Vignettes
+#'
+#' @description
+#' A tibble that shows the format a tibble should take when it is
+#'   submitted to a individual `scoring` function.
+"vdata"

@@ -1,0 +1,206 @@
+---
+title: "Tidying Data for Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tidying Data for Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `bwsTools` package requires data to be in a specified format—but your data might not look like this when you first get it. For more on this format, see [the paper introducing this package](https://osf.io/xftvq/) as well as the documentation for what specific functions require.  
+
+This vignette looks at two ways best-worst scaling data may be formatted initially and shows how to use the `tidyverse` packages `dplyr` and `tidyr` to get your data into the format that is required for the `bwsTools` functions.  
+
+First, we load the packages we need:  
+
+```{r setup, warning = FALSE, message = FALSE}
+library(bwsTools)
+library(dplyr)
+library(tidyr)
+```
+
+```{r make_data, include = FALSE}
+dat1 <- tibble(
+  pid = 1:3,
+  
+  q1_1 = c(2,  2,   2),
+  q1_2 = c(NA, NA,  1),
+  q1_3 = c(1,  1,  NA),
+  
+  q2_1 = c(1,  1,  NA),
+  q2_2 = c(2,  NA,  1),
+  q2_3 = c(NA, 2,   2),
+  
+  q3_1 = c(NA, 1,   2),
+  q3_2 = c(2,  2,   1),
+  q3_3 = c(1,  NA, NA),
+  
+  q4_1 = c(NA,  2,  2),
+  q4_2 = c(2,   1,  1),
+  q4_3 = c(1,  NA,  NA),
+)
+
+key <- tibble(
+  q = names(dat1)[-1],
+  label = c("Steak N Shake", "Shake Shack", "Whataburger",
+            "Culvers", "Shake Shack", "Whataburger",
+            "Steak N Shake", "Culvers", "Shake Shack",
+            "Steak N Shake", "Culvers",  "Whataburger")
+)
+
+dat2 <- tibble(
+  pid = 1:3,
+  
+  q1_i1_y = c(2,  2,   2),
+  q1_i1_t = rep("Steak N Shake", 3),
+  q1_i2_y = c(NA, NA,  1),
+  q1_i2_t = rep("Shake Shack", 3),
+  q1_i3_y = c(1,  1,  NA),
+  q1_i3_t = rep("Whataburger", 3),
+  
+  q2_i1_y = c(1,  1,  NA),
+  q2_i1_t = rep("Culvers", 3),
+  q2_i2_y = c(2,  NA,  1),
+  q2_i2_t = rep("Shake Shack", 3),
+  q2_i3_y = c(NA, 2,   2),
+  q2_i3_t = rep("Whataburger", 3),
+  
+  q3_i1_y = c(NA, 1,   2),
+  q3_i1_t = rep("Steak N Shake", 3),
+  q3_i2_y = c(2,  2,   1),
+  q3_i2_t = rep("Culvers", 3),
+  q3_i3_y = c(1,  NA, NA),
+  q3_i3_t = rep("Shake Shack", 3),
+  
+  q4_i1_y = c(NA,  2,  2),
+  q4_i1_t = rep("Steak N Shake", 3),
+  q4_i2_y = c(2,   1,  1),
+  q4_i2_t = rep("Culvers", 3),
+  q4_i3_y = c(1,  NA,  NA),
+  q4_i3_t = rep("Whataburger", 3),
+)
+```
+
+For simplicity's sake, imagine a simple scenario where three survey respondents respond to a best-worst scaling design that has four items that appear over four trials of three options. The data appear in "wide" format, where each row is a participant (`pid` being the unique identifier). The column names follow a standardized format: `qX_Z`, where `X` denotes what trial it was (one through four) and `Z` indicates the item shown (the first, second, or third item). Values are `2` if it was chosen as best, `1` if it was chosen as worst, and `NA` if it was not chosen. I find that this is how data come down from most common platforms, such as Qualtrics. Example data may look like:  
+
+```{r show_dat1}
+dat1
+```
+
+We can see that, in the first trial, respondents 1 and 2 both chose the third option as worst and first option as best In the fourth trial, respondents 2 and 3 both chose the second option as worst and the first option as best. But what do these refer to?  
+
+I like to have a `data.frame` that I call `key`. This tells me what each option in each trial refers to.  
+
+```{r show_key}
+key
+```
+
+This allows us to interpret the above data better: respondents 1 and 2 both chose Whataburger as worst and Steak N Shake as best in the first trial.  
+
+I assume some knowledge of using the tidyverse, but I suggest checking out [*R for Data Science*](https://r4ds.had.co.nz/) for a gentle introduction to it if you are not.  
+
+The following pipe chain shows how to take the `data.frame` above and format it how the package would like for calculating individual-level scores. See comments for additional explanation.
+
+```{r dat1_indiv}
+dat1_i <- dat1 %>% 
+  # 1. collect all of the non-pid columns, where variable names are filled into
+  #    the column q, and the values are in column resp
+  gather("q", "resp", -pid) %>%
+  mutate(
+    resp = case_when(  # 2. recode resp such that
+      resp == 2 ~ 1,   #    if resp is 2, make it 1
+      resp == 1 ~ -1,  #    if resp is 1, make it -1
+      is.na(resp) ~ 0  #    if resp is NA, make it zero
+    )
+  ) %>% 
+  # 3. join with the key data.frame by the column q
+  left_join(key, by = "q") %>% 
+  # 4. separate the q column into the block number and the item number
+  #    by the underscore
+  separate(q, c("block", "temp"), sep = "_") %>% 
+  # 5. unselect the item number, since it is no longer needed
+  #    as you have the item name now
+  select(-temp)
+```
+
+This now follows the tidy format that `bwsTools` requires. One column indicates the unique identifier for the respondent, another the trial (or block) that the choices were presented in, the response (as 1 if best, -1 if worst, and 0 as unselected), and the name of the item.
+
+```{r show_dat1_indiv}
+dat1_i
+```
+
+And the following code demonstrates how to do so if one wanted to calculate aggregate scores. Note that it starts with the individual-level data, `dat1_i`.  
+
+```{r dat1_agg}
+dat1_a <- dat1_i %>% 
+  # 1. group by the label
+  group_by(label) %>% 
+  # 2. summarise such that...
+  summarise(
+    total = n(),              # n() shows number of times the item appeared
+    best = sum(resp == 1),    # sum up the number of times it was selected best
+    worst = sum(resp == -1),  # and sum up the times it was selected as worst
+  )
+```
+
+And you can see below that these now run without any errors.  
+
+```{r it_runs}
+res1_i <- e_bayescoring(dat1_i, "pid", "block", "label", "resp")
+head(res1_i)
+```
+
+By default, it gets returned in the tidy format. This makes it perfect for plotting. But let's say you wanted to join it back to your original data, because you want to correlate scores with, for example, age. You could specify the format to return as `wide` and then join back to the original data, `dat1`.   
+
+```{r join_back}
+dat1 <- e_bayescoring(dat1_i, "pid", "block", "label", "resp", wide = TRUE) %>% 
+  left_join(dat1, by = "pid")
+head(dat1)
+```
+
+That `key` above assumes that everyone is seeing the same design. What if they aren't? Data in this situation might look like it does below. There are now two columns for each decision: one indicating if it was selected best, worst, or unselected (`qX_iZ_y` below), and one indicating what the item read (`qX_iZ_t`) where `X` again represents what trial (i.e., block) the respondent was on and the `Z` represents the item number. Then `_y` indicates it is the response and `_t` indicates it is the label. These data may look like:  
+
+```{r show_dat2}
+dat2
+```
+
+The tidying procedure is similar to that above. See comments below.  
+
+```{r tidy_dat2}
+dat2_i <- dat2 %>% 
+  # 1. collect all of the non-pid columns, where the column name is now called
+  #    temp, and the values in those columns are now all in the value column
+  gather("temp", "value", -pid) %>% 
+  # 2. break apart the temp column by the underscore, so now it indicates
+  #    the block in the block column, the item number in the item column,
+  #    and whether or not the value refers to the label (t) or response (y)
+  #    in column t_or_y
+  separate(temp, c("block", "item", "t_or_y"), sep = "_") %>% 
+  # 3. spread out t_or_y, filling it with the values of value
+  spread(t_or_y, value) %>% 
+  # 4. recode answers, just like in the above example
+  mutate(
+    y = case_when(
+      y == 2 ~ 1,
+      y == 1 ~ -1,
+      is.na(y) ~ 0
+    )
+  ) %>% 
+  # 5. remove the item number column, as it is not needed anymore
+  select(-item)
+```
+
+Now, the data are in the correct format for using the `bwsTools` individual scoring functions.  
+
+```{r show dat2_i}
+dat2_i
+```
+
+Using these individual-level data to aggregate up follows the same procedure as above.  

@@ -1,0 +1,81 @@
+---
+title: "Calculating Individual Scores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calculating Individual Scores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Individual-level scoring was the driving reason for making the `bwsTools` package, and various functions calculate them. See the documentation and the paper introducing this package for more details and statistical background.  
+
+```{r setup, message=FALSE}
+library(bwsTools)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+Each of them takes data in a specified format (see the tidying data vignette). The first five arguments for each function follow the same syntax: data, name of respondent identification column, name of block or trial column, name of item column, and the name of the column that scores the decision as -1, 0, or 1.  
+
+We can run all five with their defaults like so:  
+
+```{r run}
+set.seed(1839)
+res1 <- diffscoring(vdata, "id", "block", "issue", "value")
+res2 <- e_bayescoring(vdata, "id", "block", "issue", "value")
+res3 <- eloscoring(vdata, "id", "block", "issue", "value")
+res4 <- walkscoring(vdata, "id", "block", "issue", "value")
+res5 <- prscoring(vdata, "id", "block", "issue", "value")
+```
+
+In these data, the scores correlate very highly with one another:  
+
+```{r correl}
+res <- list(res1, res2, res3, res4, res5) %>% 
+  Reduce(function(x, y) left_join(x, y, by = c("id", "issue")), .)
+
+round(cor(res[, -1:-2]), 2)
+
+pairs(res[, -1:-2])
+```
+
+One of the most frequent uses of individual-level scores, from my reading of the literature at least, is for creating clusters or latent classes of groups based on these scores. What is nice about the `bwsTools` package is that it returns data that can be then clustered using whatever method you prefer (and with whatever other data you want to include): k-means, latent class analysis, mixture models, DBSCAN, agglomerative clustering—whatever you'd like!  
+
+I will demonstrate unsupervised learning on the empirical Bayes multinomial model scores, using k-means clustering. I use the `NbClust` package to find the best $k$, but I don't include that bit here since it takes some time to calculate. I found that the best $k = 3$ in this situation.   
+
+I take the results and pivot them wide, then run k-means clustering on everything but the identification variable (the first column).  
+
+```{r kmeans}
+res2_wide <- res2 %>% 
+  spread(issue, b_ebayes)
+
+set.seed(1839)
+clust <- kmeans(res2_wide[, -1], 3)
+```
+
+We can then assign this cluster as a factor to our data frame, and we can look at the mean scores for each item by cluster:  
+
+```{r show_clusters}
+res2_wide$cluster <- factor(clust$cluster)
+
+res2_wide %>% 
+  select(-id) %>% 
+  group_by(cluster) %>% 
+  summarise_all(mean) %>% 
+  gather("issue", "mean", -cluster) %>% 
+  ggplot(aes(x = cluster, y = mean)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ issue)
+```
+
+This specific example asked people the most ("best") and least ("worst") important issues facing the country today. We could probably label these clusters as conservative, moderate, and liberal, respectively. This is most apparent on the race item: the third cluster finds it the most pressing of the three groups, the first cluster the least of the three groups, and two is in the middle. The second cluster also cares about healthcare and the economy mostly, while the other two clusters are more varied. The third really does not care about bias in the media; the first cluster has the highest score for national security.  
+
+Far more sophisticated approaches can be taken to clustering and interpreting these data, but this is a quick demonstration as what is possible once one has the scores.  
