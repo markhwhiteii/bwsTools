@@ -1,0 +1,91 @@
+---
+title: "Calculating Aggregate Scores"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Calculating Aggregate Scores}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Aggregate scores refer to rating best-worst scaling scores across the entire sample. Sometimes, that is what researchers want to know: What are the most-preferred options? The `bwsTools` package provides two functions for doing so: `ae_mnl` and `elo`. First, we load needed packages.  
+
+```{r setup}
+library(bwsTools)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+First, I aggregate up my individual-level data, `vdata`, to the format needed for `ae_mnl`. See more on the tidying vignette for this.  
+
+```{r make_data, message=FALSE}
+dat <- vdata %>% 
+  group_by(issue) %>% 
+  summarise(
+    t = n(),
+    b = sum(value == 1),
+    w = sum(value == -1)
+  )
+```
+
+The data look like:  
+
+```{r show_dat}
+dat
+```
+
+Such that abortion was picked as the most important issue facing our country ("best") 302 times and the least important issue ("worst") 352 times. This goes into the `ae_mnl` function, which stands for analytical estimation of the multinomial logistic model. See the documentation for references on how this is calculated.  
+
+```{r ae_mnl}
+res1 <- ae_mnl(dat, "t", "b", "w")
+```
+
+This result shows the regression coefficient for the multinomial model, the standard error, lower and upper bounds, and the choice probability for each item.  
+
+```{r show ae_mnl_res}
+res1
+```
+
+I like to bind these columns back to my original data so that I can get the item labels. Then, I usually plot them in `ggplot` the following way:  
+
+```{r }
+dat %>% 
+  bind_cols(res1) %>% 
+  arrange(b1) %>% 
+  mutate(issue = factor(issue, issue)) %>% 
+  ggplot(aes(x = issue, y = b1)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = lb, ymax = ub), width = 0) +
+  coord_flip()
+```
+
+From here, it is pretty easy to see that healthcare and economy are what people said they cared about most. There's a bunch in the middle, and then drugs, foreign affairs, and bias in the media all fall in the least important range.  
+
+The `ae_mnl` function assumes a balanced incomplete block design. But sometimes that is not possible. What if you wanted to compare, say, 150 different items? A balanced incomplete block design would be too much for any one participant to realistically be able to do. One way is to calculate Elo scores (again, see the documentation for references).  
+
+This time, the function looks like an individual-level scoring function, even though it does aggregate ratings. You give the `elo` function the participant identification, the block number, the item, and the value (1 for best, 0 for not chosen, -1 for worst).  
+
+```{r elo}
+set.seed(1839)
+res2 <- elo(vdata, "id", "block", "issue", "value")
+```
+
+The result looks similar to the above. All Elo scores start at 1000, so we are looking for how above or below an item is relative to 1000.  
+
+```{r show_elo}
+res2
+```
+
+Since these data both came from a balanced incomplete block design, we would expect the two methods to agree. And they do:  
+
+```{r correl}
+cor(res1$b, res2$elo)
+plot(res1$b, res2$elo)
+```
