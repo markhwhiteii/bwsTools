@@ -27,5 +27,5 @@ LazyData: true
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Suggests: 
-    testthat
+    testthat,
     knitr
