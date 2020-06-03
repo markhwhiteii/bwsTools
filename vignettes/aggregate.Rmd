@@ -29,9 +29,9 @@ First, I aggregate up my individual-level data, `vdata`, to the format needed fo
 dat <- vdata %>% 
   group_by(issue) %>% 
   summarise(
-    t = n(),
-    b = sum(value == 1),
-    w = sum(value == -1)
+    totl = n(),
+    best = sum(value == 1),
+    wrst = sum(value == -1)
   )
 ```
 
@@ -44,7 +44,7 @@ dat
 Such that abortion was picked as the most important issue facing our country ("best") 302 times and the least important issue ("worst") 352 times. This goes into the `ae_mnl` function, which stands for analytical estimation of the multinomial logistic model. See the documentation for references on how this is calculated.  
 
 ```{r ae_mnl}
-res1 <- ae_mnl(dat, "t", "b", "w")
+res1 <- ae_mnl(dat, "totl", "best", "wrst")
 ```
 
 This result shows the regression coefficient for the multinomial model, the standard error, lower and upper bounds, and the choice probability for each item.  
@@ -58,9 +58,9 @@ I like to bind these columns back to my original data so that I can get the item
 ```{r }
 dat %>% 
   bind_cols(res1) %>% 
-  arrange(b1) %>% 
+  arrange(b) %>% 
   mutate(issue = factor(issue, issue)) %>% 
-  ggplot(aes(x = issue, y = b1)) +
+  ggplot(aes(x = issue, y = b)) +
   geom_point() +
   geom_errorbar(aes(ymin = lb, ymax = ub), width = 0) +
   coord_flip()
