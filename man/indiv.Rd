@@ -4,7 +4,9 @@
 \name{indiv}
 \alias{indiv}
 \title{Example Data for Individual-Level Best-Worst Scaling}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 520 rows and 4 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 520 rows and 4 columns.
+}
 \usage{
 indiv
 }

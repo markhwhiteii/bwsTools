@@ -4,7 +4,9 @@
 \name{vdata}
 \alias{vdata}
 \title{Example Data Used in Vignettes}
-\format{An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 18200 rows and 4 columns.}
+\format{
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 18200 rows and 4 columns.
+}
 \usage{
 vdata
 }

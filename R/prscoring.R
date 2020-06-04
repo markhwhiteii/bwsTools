@@ -34,9 +34,11 @@
 #'   has its own column and the walkscore is filled-in those columns.
 #' 
 #' @examples
+#' \dontrun{
 #' data(indiv)
 #' head(indiv)
 #' prscoring(indiv, "id", "block", "label", "value")
+#' }
 #' 
 #' @references
 #' Brin, S., & Page, L. (1998). The anatomy of a large-scale hypertextual

@@ -42,10 +42,12 @@ This function requires data to be in a specified format. Each row must
   selected as either (0).
 }
 \examples{
+\dontrun{
 data(indiv)
 head(indiv)
 # use more than 100 walks; only using 100 here for speed
 walkscoring(indiv, "id", "block", "label", "value", 100)
+}
 
 }
 \references{

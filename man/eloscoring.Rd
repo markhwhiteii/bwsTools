@@ -4,8 +4,7 @@
 \alias{eloscoring}
 \title{Elo Method to Calculate Individual Best-Worst Scores}
 \usage{
-eloscoring(data, id, block, item, choice, K = 30, iter = 100,
-  wide = FALSE)
+eloscoring(data, id, block, item, choice, K = 30, iter = 100, wide = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}

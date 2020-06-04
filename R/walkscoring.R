@@ -29,10 +29,12 @@
 #'   has its own column and the walkscore is filled-in those columns.
 #' 
 #' @examples
+#' \dontrun{
 #' data(indiv)
 #' head(indiv)
 #' # use more than 100 walks; only using 100 here for speed
 #' walkscoring(indiv, "id", "block", "label", "value", 100)
+#' }
 #' 
 #' @references 
 #' White, M. H., II. (2019). bwsTools: An R package for case 1 best-worst

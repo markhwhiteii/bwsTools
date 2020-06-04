@@ -4,7 +4,9 @@
 \name{agg}
 \alias{agg}
 \title{Example Data for Non-BIBD Aggregate-Level Best-Worst Scaling}
-\format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 400 rows and 4 columns.}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 400 rows and 4 columns.
+}
 \usage{
 agg
 }
