@@ -16,8 +16,8 @@ test_that("a square matrix of unique topics by unique topics is generated", {
 })
 
 test_that("rows all sum to one", {
-  expect_true(all(rowSums(res1) == 1))
-  expect_true(all(rowSums(res2) == 1))
+  expect_true(all(sapply(rowSums(res1), function(x) isTRUE(all.equal(x, 1)))))
+  expect_true(all(sapply(rowSums(res2), function(x) isTRUE(all.equal(x, 1)))))
 })
 
 test_that("best and worst matrices differ", {
