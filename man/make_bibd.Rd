@@ -4,11 +4,15 @@
 \alias{make_bibd}
 \title{Make Balanced Incomplete Block Designs from bibds Designs}
 \usage{
-make_bibd(design)
+make_bibd(design, seed = 1839)
 }
 \arguments{
 \item{design}{Integer from 1 to 32. Corresponds to the characteristics from
 the bibds data.frame object.}
+
+\item{seed}{Integer to set seed for reproducibility, such that the same
+design will be returned on different occasions. Defaults to 1839, so that
+the function will, by default, yield reproducible designs.}
 }
 \value{
 A tibble. The first column indicates the block, and the rest of the
@@ -16,5 +20,5 @@ A tibble. The first column indicates the block, and the rest of the
 }
 \description{
 This function generates a balanced incomplete block design. It takes one
-  argument, the design number from the bibds data.frame object. See bibds
+  argument, the design number from the bibds data.frame object. See bibds.
 }
