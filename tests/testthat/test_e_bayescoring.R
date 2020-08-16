@@ -26,11 +26,11 @@ test_that("computation is correct", {
   
   expect_equal(
     round(res[res$id == 10 & res$label == "crime", "b_ebayes", drop = TRUE], 2),
-    -.97
+    -.46
   )
   expect_equal(
     round(res[res$id == 1 & res$label == "guns", "b_ebayes", drop = TRUE], 2), 
-    .45
+    .2
   )
 })
 

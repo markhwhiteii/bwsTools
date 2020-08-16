@@ -4,16 +4,7 @@
 \alias{e_bayescoring}
 \title{Empirical Bayes Method to Calculate Individual Best-Worst Scores}
 \usage{
-e_bayescoring(
-  data,
-  id,
-  block,
-  item,
-  choice,
-  E = 0.01,
-  alpha = 0.1,
-  wide = FALSE
-)
+e_bayescoring(data, id, block, item, choice, E = 0.1, alpha = 1, wide = FALSE)
 }
 \arguments{
 \item{data}{A data.frame of the type described in details.}
@@ -55,7 +46,7 @@ Individual utilities from empirical bayes estimations. Instead of doing the
   probabilities shown using Equation 10 in Lipovetsky & Conklin (2015) and
   transforms them to be on a linear regression coefficient scale. Default
   values for the E and alpha parameters are those performing best in their
-  simulations.
+  empirical example.
 }
 \details{
 This function requires data to be in a specified format. Each row must

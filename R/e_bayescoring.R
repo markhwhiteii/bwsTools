@@ -8,7 +8,7 @@
 #'   probabilities shown using Equation 10 in Lipovetsky & Conklin (2015) and
 #'   transforms them to be on a linear regression coefficient scale. Default
 #'   values for the E and alpha parameters are those performing best in their
-#'   simulations.
+#'   empirical example.
 #'
 #' @details
 #' This function requires data to be in a specified format. Each row must
@@ -54,8 +54,8 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom rlang sym
 #' @export
-e_bayescoring <- function(data, id, block, item, choice, E = .01,
-                          alpha = .1, wide = FALSE) {
+e_bayescoring <- function(data, id, block, item, choice, E = .1,
+                          alpha = 1, wide = FALSE) {
   
   # check data ----
   get_checks(data, id, block, item, choice)
