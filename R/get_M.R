@@ -31,14 +31,20 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
   ui <- length(unique(data[[item]])) # num. of unique items
   M <- matrix(NA, nrow = ui, ncol = ui)
   diag(M) <- 0
-  colnames(M) <- rownames(M) <- unique(data[[item]])
+  colnames(M) <- rownames(M) <- sort(unique(data[[item]]))
+  
+  # calculate appearances for each pair ----
+  apps <- data %>% 
+    dplyr::select(!!sym(block), !!sym(item)) %>% 
+    table() %>% 
+    crossprod()
   
   # score for best ----
   if (bw == "b") {
     for (r in 1:nrow(M)) {
-      cn <- rownames(M)[r]
+      cn <- rownames(M)[r]                                       # current item
       for (b in unique(data[[block]])) {
-        cb <- data[data[[block]] == b, c(item, choice)] %>% 
+        cb <- data[data[[block]] == b, c(item, choice)] %>%      # current block
           dplyr::group_by(!!sym(item)) %>% 
           dplyr::summarise(score = sum(!!sym(choice)))
         for (i in cb[[item]]) {
@@ -82,6 +88,9 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
         M[r, ] <- M[r, ] / sum(M[r, ])
     }
   }
+  
+  # adjust for number of pairwise matchups ----
+  M <- M / apps
   
   return(M)
 }
