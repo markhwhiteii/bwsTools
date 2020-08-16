@@ -47,7 +47,7 @@ walkscoring <- function(data, id, block, item, choice, walks = 10000,
                         wide = FALSE) {
   
   # check data ----
-  get_checks(data, id, block, item, choice)
+  get_checks(data, id, block, item, choice, nonbibd = TRUE)
   
   # do for all ids ----
   out <- lapply(unique(data[[id]]), function(x) {
