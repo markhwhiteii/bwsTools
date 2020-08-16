@@ -1,4 +1,4 @@
-context("Make sure data is formatted correctly")
+context("Make sure data are formatted correctly")
 library(bwsTools)
 
 test_that("the column check works", {
@@ -25,6 +25,22 @@ test_that("pairwise check works", {
   tmp <- indiv
   tmp <- tmp[tmp$id == 1 & tmp$block != 10, ]
   expect_error(get_checks(tmp, "id", "block", "label", "value"))
+})
+
+test_that("pairwise warnings thrown when needed", {
+  tmp <- agg
+  tmp <- tmp[tmp$pid == 1, ]
+  expect_warning(
+    get_checks(tmp, "pid", "trial", "character", "decision", nonbibd = TRUE)
+  )
+})
+
+test_that("pairwise errors thrown when needed", {
+  tmp <- agg
+  tmp <- tmp[tmp$pid == 1, ]
+  expect_error(
+    get_checks(tmp, "pid", "trial", "character", "decision")
+  )
 })
 
 test_that("success returns nothing", {
