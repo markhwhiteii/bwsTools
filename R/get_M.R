@@ -79,6 +79,9 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
     }
   }
   
+  # adjust for number of pairwise matchups ----
+  M <- M / apps
+  
   # normalize ----
   if (normal) {
     for (r in 1:nrow(M)) {
@@ -88,9 +91,6 @@ get_M <- function(data, bw, block, item, choice, normal = TRUE) {
         M[r, ] <- M[r, ] / sum(M[r, ])
     }
   }
-  
-  # adjust for number of pairwise matchups ----
-  M <- M / apps
   
   return(M)
 }
