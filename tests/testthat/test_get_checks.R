@@ -18,7 +18,19 @@ test_that("one best and one worst check works", {
 })
 
 test_that("number of items per block check works", {
+  tmp <- indiv
   expect_error(get_checks(tmp[-2, ], "id", "block", "label", "value"))
+})
+
+test_that("item appearing more than once in a block throws error", {
+  tmp <- indiv
+  tmp$label[2] <- "abortion"
+  expect_error(get_checks(tmp, "id", "block", "label", "value"))
+})
+
+test_that("rating different items throws error", {
+  tmp <- agg
+  expect_error(get_checks(tmp, "pid", "trial", "character", "decision"))
 })
 
 test_that("pairwise check works", {
