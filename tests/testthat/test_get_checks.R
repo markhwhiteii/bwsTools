@@ -28,6 +28,14 @@ test_that("item appearing more than once in a block throws error", {
   expect_error(get_checks(tmp, "id", "block", "label", "value"))
 })
 
+test_that("error thrown when a respondent has more trials than another", {
+  tmp <- indiv[indiv$id %in% 1:2, ]
+  tmp2 <- tmp[1:4, ]
+  tmp2$block <- 14
+  tmp <- rbind(tmp, tmp2)
+  expect_error(get_checks(tmp, "id", "block", "label", "value"))
+})
+
 test_that("rating different items throws error", {
   tmp <- agg
   expect_error(get_checks(tmp, "pid", "trial", "character", "decision"))
@@ -53,6 +61,13 @@ test_that("pairwise errors thrown when needed", {
   expect_error(
     get_checks(tmp, "pid", "trial", "character", "decision")
   )
+  
+  tmp <- indiv
+  tmp <- tmp[tmp$id == 1, ]
+  tmp2 <- tmp[1:4, ]
+  tmp2$block <- 14
+  tmp <- rbind(tmp, tmp2)
+  expect_error(get_checks(tmp, "id", "block", "label", "value"))
 })
 
 test_that("success returns nothing", {

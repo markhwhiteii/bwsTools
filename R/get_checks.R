@@ -30,6 +30,12 @@ get_checks <- function(data, id, block, item, choice, aggregate = FALSE,
     stop("'", choice, "' column must only contain -1, 0, or 1")
   }
   
+  # every id needs same amount of blocks ----
+  if (!aggregate && 
+      length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
+    stop("Each id must have the same amount of blocks")
+  }
+  
   # -1 and +1 only appear once per block per id ----
   test <- table(data[[choice]], data[[block]], data[[id]])
   test <- sapply(seq_len(dim(test)[3]), function(x) {
@@ -44,12 +50,6 @@ get_checks <- function(data, id, block, item, choice, aggregate = FALSE,
   # every block needs same amount of options ----
   if (!aggregate && length(unique(table(data[[id]], data[[block]]))) > 1) {
     stop("Each block for each id must have same amount of items")
-  }
-  
-  # every id needs same amount of blocks ----
-  if (!aggregate && 
-      length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
-    stop("Each id must have the same amount of blocks")
   }
   
   # each item can't appear more than once in an id-block ----
