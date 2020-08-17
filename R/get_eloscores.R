@@ -30,13 +30,15 @@ get_eloscores <- function(eloresults, K = 30, iter = 150) {
       Qw <- 10 ^ (winner_elo / 400)
       Ql <- 10 ^ (loser_elo / 400)
       Ew <- Qw / (Qw + Ql)
+      El <- Ql / (Qw + Ql)
       
       # hollis (2018), equation 1
-      delta <- K * (1 - Ew) # TODO: replace with K
+      Dw <- K * (1 - Ew)
+      Dl <- K * (0 - El)
       
       # update in elos table
-      elos$elo[elos$item == eloresults$winner[i]] <- winner_elo + delta
-      elos$elo[elos$item == eloresults$loser[i]] <- loser_elo - delta
+      elos$elo[elos$item == eloresults$winner[i]] <- winner_elo + Dw
+      elos$elo[elos$item == eloresults$loser[i]] <- loser_elo + Dl
     }
     
     # add id for iteration
