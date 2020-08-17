@@ -13,9 +13,12 @@
 #' @param item A string of the name of the item column.
 #' @param choice A string of the name of the choice column.
 #' @param aggregate A logical indicating whether or not these are for aggregate,
-#'   non-BIBD data. Defaults to FALSE for backward compatability.
+#'   non-BIBD data. Defaults to FALSE for backward compatibility.
+#' @param nonbibd A logical indicating whether or not these are for individual,
+#'   non-BIBD data. Defaults to FALSE for backward compatibility.
 #' @noRd
-get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
+get_checks <- function(data, id, block, item, choice, aggregate = FALSE,
+                       nonbibd = FALSE) {
   
   # columns ----
   if (!all(c(id, block, item, choice) %in% names(data))) {
@@ -25,6 +28,12 @@ get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
   # only -1, 0, and 1 ----
   if (!all(data[[choice]] %in% -1:1)) {
     stop("'", choice, "' column must only contain -1, 0, or 1")
+  }
+  
+  # every id needs same amount of blocks ----
+  if (!aggregate && 
+      length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
+    stop("Each id must have the same amount of blocks")
   }
   
   # -1 and +1 only appear once per block per id ----
@@ -43,12 +52,6 @@ get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
     stop("Each block for each id must have same amount of items")
   }
   
-  # every id needs same amount of blocks ----
-  if (!aggregate && 
-      length(unique(with(unique(data[, c(id, block)]), table(id)))) > 1) {
-    stop("Each id must have the same amount of blocks")
-  }
-  
   # each item can't appear more than once in an id-block ----
   if (any(table(data[[id]], data[[block]], data[[item]]) > 1)) {
     stop("An item cannot appear more than once in an id-block combination.")
@@ -62,17 +65,35 @@ get_checks <- function(data, id, block, item, choice, aggregate = FALSE) {
     stop("Each id must be rating the same set of items")
   }
   
-  # every pairwise item comparison must appear ----
-  test <- sapply(unique(data[[id]]), function(x) {
-    tmp <- crossprod(
-      table(
-        data[[block]][data[[id]] == x], 
-        data[[item]][data[[id]] == x]
-      )
+  # every pairwise item comparison must appear and same amount of times ----
+  test <- lapply(unique(data[[id]]), function(x) {
+    tmp <- data %>% 
+      dplyr::filter(!!sym(id) == x) %>% 
+      dplyr::select(!!sym(block), !!sym(item)) %>% 
+      table() %>% 
+      crossprod()
+    c(
+      pw_missing = any(tmp == 0), 
+      pw_same = length(unique(tmp[upper.tri(tmp) | lower.tri(tmp)])) > 1
     )
-    any(tmp == 0)
   })
-  if (!aggregate && any(test)) {
-    stop("Each pairwise comparison between items must occur for every id")
+  if (!aggregate) {
+    if (any(sapply(test, getElement, "pw_missing"))) {
+      if (!nonbibd) {
+        stop("Each pairwise comparison between items must occur for every id")
+      } else if (nonbibd) {
+        warning("Analyzing non-BIBD data. Each pairwise comparison between
+  items does not occur for every id.")
+      }
+    }
+    if (any(sapply(test, getElement, "pw_same"))) {
+      if (!nonbibd) {
+        stop("Each pairwise comparison between items must occur the same amount
+  of times for each id.")
+      } else if (nonbibd) {
+        warning("Analyzing non-BIBD data. Each pairwise comparison between items 
+  does not occur the same amount of times for each id.")
+      }
+    }
   }
 }
