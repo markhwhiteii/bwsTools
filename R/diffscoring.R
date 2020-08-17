@@ -50,7 +50,7 @@ diffscoring <- function(data, id, block, item, choice, std = FALSE,
                         wide = FALSE) {
   
   # check data ----
-  get_checks(data, id, block, item, choice)
+  get_checks(data, id, block, item, choice, nonbibd = TRUE)
   
   # get differences ----
   out <- data %>%
