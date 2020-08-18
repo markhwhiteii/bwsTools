@@ -1,9 +1,12 @@
 ## Test environments
-* local macOS Mojave 10.14 install, R 4.0.0
-* Windows Sever 08, via devtools::check_win_oldrelease(), 
+
+* local macOS Catalina 10.15.6 install, R 4.0.2
+* Windows Server 2008 R2 SP1, R-devel 32/64 bit via rhub::check()
+* Ubuntu Linux 16.04 LTS, R-release, GCC, via devtools::check_rhub()
+* Fedora Linux, R-devel, clang, gfortran, via devtools::check_rhub()
+* Windows, via devtools::check_win_oldrelease(), 
     devtools::check_win_devel(), and devtools::check_win_release()
-* Ubuntu Linux and Fedora Linux, via devtools::check_rhub()
-* Linux Xenial on R oldrelease, release, devel, via Travis CI
+* Linux Xenial on R oldrel, release, devel, via Travis CI
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
