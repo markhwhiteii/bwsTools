@@ -1,6 +1,6 @@
 ## News
 
-* v1.2.1 (2020-08-18): add seed argument to make_bibd, adjust e_bayescoring defaults, allow for non-bibd in tournament scoring methods and diffscoring, change elo calculation to better match paper (doesn't change results in testing)
+* v1.2.0 (2020-08-26): add seed argument to make_bibd, adjust e_bayescoring defaults, allow for non-bibd in tournament scoring methods and diffscoring, change elo calculation to better match paper (doesn't change results in testing)
 
 * v1.1.1 (2020-06-03): Fix bugs introduced by dplyr 1.0.0
 
