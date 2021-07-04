@@ -18,7 +18,9 @@ A paper introducing the package and showing basic usage information can be found
 
 ### Citation
 
-To cite bwsTools in publications, please use:  White, M. H., II. (2021). bwsTools: An R package for case 1 best-worst scaling. *Journal of Choice Modelling, 39*. doi: 10.1016/j.jocm.2021.100289
+To cite bwsTools in publications, please use:
+
+  White, M. H., II. (2021). bwsTools: An R package for case 1 best-worst scaling. *Journal of Choice Modelling, 39*. doi: 10.1016/j.jocm.2021.100289
 
 ### Contents
 
