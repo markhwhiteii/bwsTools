@@ -1,0 +1,12 @@
+citHeader("To cite bwsTools in publications, please use:")
+
+citEntry(entry = "article",
+  author = "Mark H. White II",
+  title = "bwsTools: An R package for case 1 best-worst scaling",
+  journal = "Journal of Choice Modelling",
+  year = "2021",
+  volume = "39",
+  doi = "10.1016/j.jocm.2021.100289",
+  textVersion = "White, M. H., II. (2021). bwsTools: An R package for case 1 best-worst scaling. Journal of Choice Modelling, 39. doi: 10.1016/j.jocm.2021.100289"
+)
+
